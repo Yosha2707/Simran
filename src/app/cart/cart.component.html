@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div class="container">
+<h1 style="margin-top:100px; margin-left:20px;">Shopping cart</h1>
+    
+<div class="row">
+    <div class="col-md-12">
+        <div id="cart" style="margin-top: 20px;" class="col-md-8"> 
+            <article class="product" *ngFor = "let data of b; let i = index">
+            <header>
+                    <img class="prod-img" alt="" style="width:100%; height:100%;" src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}' />
+            </header>
+            <div class="content">
+                <h1>{{data["Name"]}}</h1>
+                Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.
+        <div>
+            <!-- <span class="qt-minus button">-</span>
+            <span class="qt button">1</span>
+            <span class="button">+</span> -->
+            <!-- <button role="button">-</button> -->
+          <input type="number" lists="quanti" value="1" min="1" style="width:12%; height:5%;">
+          <datalist id="browsers">
+              <option value="1">
+              <option value="2">
+              <option value="3 Explorer">
+              <option value="4">
+              <option value="5">
+              <option value="6">
+            </datalist>
+            <!-- <button role="button">+</button> -->
+
+            <h2 class="full-price">
+                     69.98 <!--price from api -->
+            </h2>
+            <h2 class="price">
+                    69.98 <!--price from api -->
+            </h2>
+        </div>
+
+            </div>
+
+            <!-- <footer>
+                <a class="pricee" (click)="remove(data)">Remove</a>
+            </footer> -->
+            </article>
+        </div>
+
+
+ <div class="product-box col-md-4"> 
+        <div class="container clearfix">
+    
+                <div class="left">
+                    <h2 class="subtotal">Subtotal: <span>0</span>Rs</h2>
+                    <h3 class="tax">Taxes (5%): <span>0</span>Rs</h3>
+                    <h3 class="shipping">Shipping: <span>0</span>Rs</h3>
+                    <h1 class="total">Total: <span>0</span>Rs</h1>
+                    <a role="button"class="btn btn-info btn-xs" style="margin-top:150px">Checkout</a>
+                </div>
+            </div>
+</div> 
+</div>
+</div>
+</div>
+  

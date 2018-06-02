@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+.is-stickys img.logo{width: 14%;
+    height: auto;
+    padding-top: 19px;}
+    
+    
+    .logo{width: 27%;
+    height: auto;}
