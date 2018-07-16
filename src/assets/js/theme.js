@@ -17,6 +17,13 @@ function initMap() {
     });
 }
 
+jQuery(document).ready(function(){
+
+});
+
+
+
+
 function collision($div1, $div2) {
     var x1 = $div1.offset().left;
     var w1 = 40;
@@ -29,7 +36,8 @@ function collision($div1, $div2) {
     return true;
 }
 
-$(function () {
+jQuery(function () {
+    
 
     var price_range = $('#price-range');
     var price_range_both = $('.price-range-both');
@@ -120,6 +128,11 @@ $(function ($) {
         $('html, body').animate({scrollTop: 0}, 800);
         return false;
     });
+
+    window.onload = function() {
+        $('html, body').animate({scrollTop: 0}, 800);
+        return false;
+      };
 
     /*------ Subscribe Popup --------*/
     var subscribe_popups = $('#subscribe-popups');
@@ -435,6 +448,15 @@ $(window).scroll(function () {
         main_header.removeClass('is-sticky');
     }
 
+    /*--------- Sticky Sub-Header ---------*/
+    var main_header = $('.main-subheader');
+    if ($(this).scrollTop() > 5) {
+        main_header.addClass('is-substicky');
+    }
+    else {
+        main_header.removeClass('is-substicky');
+    }
+
     /*--------- Page to top ---------*/
     var to_top_mb = $('.to-top.mb');
     if ($(this).scrollTop() > 100) {
@@ -449,3 +471,25 @@ $(window).scroll(function () {
     }
 
 });
+
+// function formValidations() {
+jQuery('.numbersOnly').on('keyup blur', function () {
+    console.log('numbersOnly'); 
+ this.value = this.value.replace(/[^0-9]/g, ''); 
+           });           
+ jQuery('.numbersOnlyfloat').on('keyup blur', function () {
+ this.value = this.value.replace(/[^0-9\.]/g, '');           
+ });           
+  jQuery('.letterOnly').on('keyup blur', function () { 
+ //var regexp = /[^a-z A-Z % @@ /.,'() & - = *]/g;               
+  //this.value = this.value.replace(regexp, '');           
+ });            
+ jQuery('.textareaOnly').on('keyup blur', function () {               
+      //var regexp = /[^a-z A-Z 0-9 % @@ /.,'() & - = *]/g;               
+       //this.value = this.value.replace(regexp, '');           
+     });       
+    //  }
+
+    //  jQuery(document).ready(function(){
+    //     formValidations();
+    //  });

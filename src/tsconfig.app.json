@@ -1,10 +1,11 @@
 {
   "extends": "../tsconfig.json",
+  "compileOnSave": false,
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": []
+    "types": ["gapi", "gapi.auth2"]
   },
   "exclude": [
     "test.ts",

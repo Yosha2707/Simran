@@ -1,0 +1,253 @@
+<app-header [parentCount]="cartCoount"></app-header>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+
+<section class="deals sec-space light-bg">
+  <img alt="" src="assets/img/extra/sec-img-3.png" class="right-bg-img" />
+  <img alt="" src="assets/img/extra/sec-img-4.png" class="left-bg-img" />
+
+  <div class="container rel-div">
+    <div class="title-wrap row" style="margin-top: 20%;" *ngFor="let data of array |  slice:0:1">
+      <div class="col-md-3 col-sm-1 col-xs-1"></div>
+      <div class="col-md-6 col-sm-10 col-xs-10 heading">
+        <h2 class="section-title">
+          <strong>{{data.ProductCategoryName}}</strong>
+        </h2>
+
+        <h4 class="sub-title">
+          <span>SIMRAN FRESH</span>
+        </h4>
+        <input type="text" (keyup)="search($event.target.value, data.ProductCategoryId)" class="form-control title-wrap" style="width: 65%; margin-top: 2%; margin-left:18%;"
+          placeholder="{{data.ProductCategoryName}}" [(ngModel)]="searchKey" ngFocus="true" />
+      </div>
+      <div class="col-md-3 col-sm-1 col-xs-1"></div>
+    </div>
+  </div>
+</section>
+<!-- Heading Ends -->
+
+
+<div class="organic-all sec-space-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content organic-content">
+          <div id="product-tab-1" class="tab-pane fade active in">
+            <div class="product-slider-1 dots-1">
+              <div *ngIf="array?.length==''">
+                <div class="row" style="margin-top:10%;">
+                  <div class="col-md-3 col-sm-3 col-xs-3"></div>
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <img src='assets/img/extra/trans-product-not-found.png'>
+                  </div>
+                  <div class="col-md-3 col-xs-3 col-sm-3"></div>
+                </div>
+              </div>
+              <div class="item col-md-3 col-sm-6 col-xs-12" *ngFor="let data of array; let i = index">
+                <div class="product-box" style="min-height: 350px;">
+                  <div class="product-media">
+                    <div class="isstockfalse" *ngIf="data.IsOutOfStock==true">
+                      <img class="prod-img vegeImage outfade" alt="" src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}' />
+                      <a class="sold_out">Out Of Stock</a>
+                    </div>
+                    <div class="isstockfalse" *ngIf="data.IsOutOfStock==false">
+                      <a (click)="productPreview(data.Id)" href="#product-preview" data-toggle="modal">
+                          <img class="prod-img vegeImage" src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}' />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="product-caption">
+                  <a (click)="productPreview(data.Id)" href="#product-preview" data-toggle="modal">
+                      <h3 class="product-title namedesc">
+                          <span class="light-font"> </span>
+                          <strong>{{data["Name"]}}</strong>
+                        </h3>
+                  </a>
+
+                    <div class="row" class="desc">
+                      <a (click)="productPreview(data.Id)" href="#product-preview" class="viewMore" data-toggle="modal">
+                        View more..
+                      </a>
+                    </div>
+
+                    <div class="price boxprice">
+                      <strong class="clr-txt">₹ {{data["Price"]}} /{{data.UoMName}}</strong>
+                    </div>
+                  </div>
+                  <div class="row addto">
+                   <div class="col-md-6 col-sm-6 col-xs-6">
+                    <a (click)="whishlist(data)">
+                      <button class="btn wish">
+                        <span class="fa fa-heart"></span> Add to Wishlist</button>
+                    </a>
+                   </div>
+                 <div class="col-md-6 col-sm-6 col-xs-6">
+                  <a (click)="productPreview(data.Id)" href="#product-preview" data-toggle="modal">
+                    <button class="btn">
+                      <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                  </a>
+                  <!-- <a *ngIf="data.MinQuantity == null || data.MinQuantity == 0 || data.MinQuantity == undefined || data.MinQuantity == '' || data.MinQuantity=='.'"
+                    class="">
+                    <button class="btns disable">
+                      <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                  </a> -->
+                 </div>
+                  </div>
+                  <!-- <hr>
+                  <div *ngIf="data.IsOutOfStock==true">
+                    <div class="row" style="height:92px"></div>
+                  </div>
+
+                  <div *ngIf="data.IsOutOfStock==false"> -->
+                    
+                    <!-- <div class="row" style="margin-left: 0; margin-right: 0; margin-top:-8%;"> -->
+
+
+                      <!-- <div class="col-md-3 col-sm-3 col-xs-3">
+                        <div class="form-group">
+                          <label class="lab">Qty ({{data.UoMName}})</label>
+                          <div *ngIf="data.UoMName=='Pcs.' || data.UoMName=='Pkt.'">
+                            <input type="text" onkeypress="return event.charCode >= 48" class="cal numbersOnly" [(ngModel)]="data.MinQuantity" maxlength="2"
+                              (keyup)="calculateProductPrice($event.target.value, data.Price, i)" required placeholder="0">
+                          </div>
+                          <div *ngIf="data.UoMName=='Kg.'">
+                            <input type="text" onkeypress="return event.charCode >= 46" class="cal numbersOnly" name="" maxlength="6" [(ngModel)]="data.MinQuantity"
+                              (keyup)="calculateProductPrice($event.target.value, data.Price, i)" required placeholder="0">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-sm-3 col-xs-3">
+                        <div class="form-group">
+                          <label class="lab">Total (Rs.)</label>
+                          <input type="text" class="cal" [(ngModel)]="data.finalPrice" readonly>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-6" style="margin-top: 25px;">
+                        
+                      </div> -->
+                      <!-- <div class="col-md-6" style="margin-top: 25px;">
+                          <button  *ngIf="data.MinQuantity > 0" (click)="cartdata(data, data.MinQuantity)" class="fa fa-shopping-cart shopcart"></button>
+                          <button *ngIf="data.MinQuantity == null || data.MinQuantity == 0 || data.MinQuantity == undefined || data.MinQuantity == ''" class="fa fa-shopping-cart shopcart disable">ADD</button>
+                          <button (click)="whishlist(data)" class="fa fa-heart shopheart" title="Add to Wishlist"></button>
+                        </div> -->
+                    <!-- </div> 
+                  </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Preview -->
+<div class="modal fade" id="product-preview">
+  <div class="modal-dialog modal-lg product-modal">
+    <div class="modal-content">
+      <a aria-hidden="true" data-dismiss="modal" class="sb-close-btn close" href="#">
+        <i class=" fa fa-close"></i>
+      </a>
+
+      <div class="product-single pb-50 clearfix">
+        <div class="col-md-4 col-sm-4 col-sm-offset-2 col-lg-offset-0 pt-50">
+          <div class="prod-slider sync1">
+            <div class="item">
+              <div class="">
+                <img src='{{imgPreview}}' alt="" class="imgpre" style="width: 80%;">
+                <a href='{{imgPreview}}' data-gal="prettyPhoto[prettyPhoto]" title="Product" class="caption-link">
+                  <i class="arrow_expand"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 pt-50">
+          <div class="product-content block-inline">
+            <div class="single-caption">
+              <h3 class="section-title previewname">
+                <a>
+                  <strong>{{preview.Name}}</strong>
+                </a>
+              </h3>
+              <span class="divider-2"></span>
+              <p class="price">
+                <strong class="clr-txt fsz-20">₹ {{preview.Price}}/{{preview.UoMName}} </strong>
+              </p>
+
+              <div class="row desrow">
+                <div class="container">
+                    <div class="fsz-16 col-md-3 col-xs-12 col-sm-12">
+                        <p class="content hideContent">{{preview.Description}}</p>
+                      </div>
+                      
+                </div>
+              </div>
+
+              <div class="row  quanttotal">
+                <div class="">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      <label class="lab">Qty ({{preview.UoMName}})</label>
+                      <div *ngIf="preview.UoMName=='Pcs.' || preview.UoMName=='Pkt.'">
+                        <input type="text" onkeypress="return event.charCode >= 48" class="call numbersOnly" [(ngModel)]="preview.MinQuantity" maxlength="2"
+                          (keyup)="calculateProductPricePrev($event.target.value, preview.Price, i)" required placeholder="0">
+                      </div>
+                      <div *ngIf="preview.UoMName=='Kg.'">
+                        <input type="text" onkeypress="return event.charCode >= 46" class="call numbersOnly" name="" maxlength="6" [(ngModel)]="preview.MinQuantity"
+                          (keyup)="calculateProductPricePrev($event.target.value, preview.Price, i)" required placeholder="0">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      <label class="lab">Total (Rs.)</label>
+                     <div>
+                      <input type="text" placeholder="0" class="call disabletotal" [(ngModel)]="prevfinalprice" readonly>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ul class="meta">
+                <!-- <li>
+                  <strong> CATEGORY </strong>
+                  <span>: {{preview.ProductCategoryName}}</span>
+                </li> -->
+              </ul>
+              <div class="divider-full-1"></div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <a (click)="whishlist(data)">
+                        <button class="btn wish">
+                          <span class="fa fa-heart"></span> Add to Wishlist</button>
+                      </a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 add-cart">
+                        <a *ngIf="preview.MinQuantity > 0" (click)="cartdata(preview, preview.MinQuantity)">
+                          <button class="btn">
+                            <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                        </a>
+                         <a *ngIf="preview.MinQuantity == null || preview.MinQuantity == 0 || preview.MinQuantity == undefined || preview.MinQuantity == '' || preview.MinQuantity=='.'"
+                          class="">
+                          <button class="btn disable">
+                            <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                        </a> 
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Product Preview Ends -->
+
+
+
+
+
+<app-footer></app-footer>

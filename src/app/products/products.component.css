@@ -1,0 +1,387 @@
+.vegeImage{
+    widows: 70%;
+    /* height : 170px!important; */
+}
+
+.outfade{
+    opacity: 0.5;
+}
+
+
+.poo{
+    border-radius: 2em;
+    display: table;
+    position: absolute;
+    right: 8px;
+    top: -21%;
+    visibility: hidden;
+    z-index: 1;
+
+    transform: translateY(-65px);
+    -webkit-transform: translateY(-65px);
+}
+.previewimg{
+    width:75%;
+    margin-top:5%;
+}
+.isstockfalse{
+    padding: 5px;
+    background-color: white;
+    overflow: hidden;
+    height: 200px;
+}
+img{
+    cursor: pointer;
+}
+
+.quanttotal{
+    margin-left: -20px;
+    margin-right: 2px;
+}
+
+.fsz-16{
+    text-align: justify;
+  
+}
+
+
+
+.initial{
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.viewMore{
+    font-size: 11px; 
+    color:green;
+}
+@media screen and (max-width:700px){
+    .previewname{
+        font-size:19px;
+    }.previewimg{
+        width:56%;
+    }.btns{
+        background-color: green;
+        color: white;
+        padding-top: 3px;
+        height: 25px;
+margin-top: -2%;
+    }
+}
+
+.none{
+    display: none;
+}
+
+
+
+
+.sold_out {
+    top: 2em;
+    left: -4em;
+    color: #fff;
+    display: block;
+    position:absolute;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: .06em;
+    background-color: #A00;
+    padding: 0.5em 5em 0.4em 5em;
+    text-shadow: 0 0 0.75em #444;
+    box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
+    font: bold 16px/1.2em Arial, Sans-Serif;
+    -webkit-text-shadow: 0 0 0.75em #444;
+    -webkit-box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
+    -webkit-transform: rotate(-45deg) scale(0.75,1);
+    z-index:10;
+}
+.sold_out:before {
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    margin: -0.3em -5em;
+    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    border: 2px rgba(255,255,255,0.7) dashed;
+}
+.boxprice{
+    margin-top: -8%;
+    margin-bottom: 8%;
+}
+.poo > a {
+    color: black;
+    font-size: 20px;
+    height: 45px;
+    line-height: 45px;
+    width: 60px;
+}
+
+.poo > a:first-child {
+    border-radius: 2em 0 0 2em;
+}
+
+/* .poo > a:last-child {
+    border-radius: 0 2em 2em 0;
+} */
+
+.poo> a:hover {
+    color: red;
+}
+
+/* .poo> a:visited {
+    background-color: red;
+    color: #fff;
+}
+
+.poo > a:nth-child(2n):hover {
+    background-color: #79d1d6;
+} */
+
+.product-box .poo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(35px);
+    -webkit-transform: translateY(35px);
+}
+
+
+
+.product-media > a .prod-img {
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.title.wrap{
+    margin-bottom: 0px;
+}
+
+.product-box{
+    border: 1px solid whitesmoke;
+}
+
+.form-control{
+    background-color: white;
+    /* border-radius: 15px;
+    height: 10px; */
+}
+
+.form-control:focus{
+    background-color: white;
+}
+.main-header {
+    padding: 40px 10px;
+border-bottom: 1px solid lightgray;
+    transition: all 0.4s ease-in-out 0s;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+}
+
+h2{
+    margin-top: 0px;
+}
+
+.heading{
+    margin-top: -6%;
+}
+
+@media screen and (max-width:768px){
+    .heading{
+        margin-top: 4%;
+    }.sec-space{
+        padding-bottom: 0;
+    }.desrow{
+        padding-left: -11px;
+    }
+}
+
+.extra{
+    margin-top: -6%;
+    font-size: 18px;
+}
+.section-title.previewname{
+    margin-top: 3%;
+    font-size: 22px;
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-size: 40px;
+    letter-spacing: 1px;
+}
+
+.deals .left-bg-img {
+    position: absolute;
+    bottom: -3%;
+    left: 0;
+}
+
+.sec-space{
+    padding-bottom: 13px;;
+}
+ 
+ .shopheart{
+     /* padding-left: 7%; */
+     font-size: 20px; 
+  }
+
+  .addto{
+   margin-bottom: 10px;
+  }
+ 
+
+  .wish{
+      margin-left: 4px;
+  }
+.btn{
+    background-color: #e0e4a8;
+    font-size: 13px;
+    color: black;
+    margin-top: 7px;
+    padding-top: 3px;
+    height: 25px;
+}
+
+.imgpre{
+    border: 2px solid #eee;
+    border-radius: 10px;
+    
+}
+@media screen and (min-width:768px){
+    .btns{
+        background-color: #e0e4a8;
+        color: black;
+        margin-top: 7px;
+        padding-top: 3px;
+        height: 25px;
+    }.modal{
+        margin-top: 8%;
+        overflow: hidden;
+        margin-left: 25%;
+        width: 50%;
+        display: block;
+        padding-right: 0;
+    }.close{
+        margin-right: 38%;
+    }
+    
+}
+ .desc{
+    cursor:pointer;
+        margin-top: -10px;
+         margin-bottom: 25px;
+         /* text-overflow: ellip;
+         overflow: hidden;
+         white-space: nowrap; */
+ }
+.call{
+    outline-width: 0;
+    width: 75%;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid green;
+    text-align: center;
+}.call:focus{
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid green;
+    text-align: center;
+}
+ .namedesc{
+     cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+ }
+ a{
+     text-decoration: none;
+ }
+
+ .prod-btns {
+    border-bottom: 0;
+ border-top: 0; 
+ margin:0;
+    padding: 15px 0;
+}
+
+.disabletotal{
+    background-color: #eee;
+    
+    
+}
+.desrow{
+    margin-left: -27px;
+}
+::-webkit-input-placeholder { color: black; text-transform: uppercase; }
+::-moz-placeholder { color: black; text-transform: uppercase; }
+:-ms-input-placeholder { color: black; text-transform: uppercase; }
+
+@media screen and (max-width:360px){
+    .container {
+        padding-right: 15px;
+        padding-left: 0;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+hr{
+    margin-top: 3%;
+}
+ .cal{
+    width: 59px;
+    border-radius: 6px;
+    border: 1px solid green;
+    text-align: center;
+ }
+
+ .cal:focus{
+    width: 59px;
+    border-radius: 6px;
+    border: 1px solid green;
+    text-align: center;
+ }
+
+ .lab{
+     font-size: 12px;
+     margin-left: 5px;
+ }
+
+ .disable {
+    cursor: not-allowed;
+
+}
+
+
+
+
+
+.hideContent {
+    overflow: hidden;
+    line-height: 1em;
+    height: 2em;
+}
+
+.showContent {
+    line-height: 1em;
+    height: auto;
+}
+.showContent{
+    height: auto;
+}
+
+
+
+.show-more {
+    padding: 10px 0;
+    text-align: center;
+}

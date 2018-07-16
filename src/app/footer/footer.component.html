@@ -1,9 +1,10 @@
           
            <!-- FOOTER -->
+           
             <footer class="page-footer"> 
               <section class="sec-space light-bg">
                   <div class="container">
-                      <div class="row">
+                      <div class="row" style="margin-top: 18px;">
                           <div class="col-md-3 col-sm-12 footer-widget">
                               <!-- <div class="main-logo">
                                   <a href="#"> <img alt="" src="assets/img/logo/main-logo.html" />  </a>
@@ -12,45 +13,54 @@
                               <h2 class="title-1">  <span class="light-font">SIMRAN  </span> <strong>FRESH </strong> </h2>
                               <span class="divider-2"></span>
                               <div class="text-widget">
-                                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.</p>
+                                  <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.</p> -->
                                   <ul>
-                                      <li> <i class="fa fa-map-marker"></i> <span> <strong>100 highland ave,</strong> california, united state </span> </li>
-                                      <li> <i class="fa fa-envelope-square"></i> <span><a href="#">contact@SIMRAN.com</a> </span> </li>
-                                      <li> <i class="fa fa-phone-square"></i> <span><a href="#">www.SIMRAN.com</a> </span> </li>
+                                      <li> <i class="fa fa-map-marker"></i> <span> 1-B, Vikas Rekha Complex, Tower Square, Khatiwala Tank,<br> Indore, 452012 </span> </li>
+                                      <li> <i class="fa fa-envelope-square"></i> <span><a>info@simranfresh.com
+                                        </a> </span> </li>
                                   </ul>
                               </div>
                           </div>
+
                           <div class="col-md-3 col-sm-4 footer-widget">
-                              <h2 class="title-1">  <span class="light-font">OTHER  </span> <strong>links </strong> </h2>
+                            <h2 class="title-1">  <span class="light-font">SHOP  </span> <strong>ONLINE </strong> </h2>
+                            <span class="divider-2"></span>
+                            <ul class="list">
+                                <li *ngFor="let data of prodCategory ; let i=index"> <a  [routerLink]="['/products', data.Id]"> {{data.Name}} </a> </li>
+                            </ul>
+                        </div>
+
+                          <div class="col-md-3 col-sm-4 footer-widget">
+                              <h2 class="title-1">  <span class="light-font">IMPORTANT  </span> <strong>LINKS </strong> </h2>
                               <span class="divider-2"></span>
                               <ul class="list">
-                                  <li> <a href="#"> Vegetables </a> </li>
-                                  <li> <a href="#"> Fruits </a> </li>
-                                  <li> <a href="#"> Combo Basket </a> </li>
-                                  <li> <a href="#"> My Account </a> </li>
+                                    <li> <a routerLink="/about"> About Us </a> </li>
+                                    <li> <a routerLink="/process"> Our Process</a> </li>
+                                    <li> <a routerLink="/coustomercare"> Customer Care </a> </li>
+                                    <li> <a routerLink="/terms"> Terms & Condition </a> </li>
+                                    <li> <a routerLink="/policy"> Privacy Policy </a> </li>
+                                    <li> <a routerLink="/disclaimer"> Disclaimer </a> </li>
+                                    <li> <a routerLink="/contact"> Contact Us </a> </li>
                               </ul>
                           </div>
                           <div class="col-md-3 col-sm-4 footer-widget">
-                              <h2 class="title-1">  <span class="light-font">My  </span> <strong>account </strong> </h2>
+                              <h2 class="title-1">  <span class="light-font">My  </span> <strong>ACCOUNT </strong> </h2>
                               <span class="divider-2"></span>
                               <ul class="list">
-                                  <li> <a href="#"> My Account </a> </li>
-                                  <li><a href="#"> Order List </a></li>
-                                
+                                  <li> <a routerLink="/myaccount"> My Account </a> </li>
+                                  <li><a routerLink="/Orders"> Order List </a></li>
+                                  <li *ngIf="currentuser!=null" class="logout"><a (click)="Logout()">LogOut</a></li>
+                                  <li> <a *ngIf="currentuser==null" routerLink="/login"> Login </a> </li>
+                                  <li> <a *ngIf="currentuser==null" routerLink="/signup"> Register </a> </li>
                               </ul>
                           </div>
-                          <div class="col-md-3 col-sm-4 footer-widget">
-                              <h2 class="title-1">  <span class="light-font">Our  </span> <strong>products </strong> </h2>
+                          <!-- <div class="col-md-3 col-sm-4 footer-widget">
+                              <h2 class="title-1">  <span class="light-font">Our  </span> <strong>PRODUCTS </strong> </h2>
                               <span class="divider-2"></span>
                               <ul class="instagram-widget">
-                                  <li> <a href="#"> <img src="assets/img/extra/80x80-1.jpg" alt="" /> </a> </li>
-                                  <li> <a href="#"> <img src="assets/img/extra/80x80-2.jpg" alt="" /> </a> </li>
-                                  <li> <a href="#"> <img src="assets/img/extra/80x80-3.jpg" alt="" /> </a> </li>
-                                  <li> <a href="#"> <img src="assets/img/extra/80x80-4.jpg" alt="" /> </a> </li>
-                                  <li> <a href="#"> <img src="assets/img/extra/80x80-5.jpg" alt="" /> </a> </li>
-                                  <li> <a href="#"> <img src="assets/img/extra/80x80-6.jpg" alt="" /> </a> </li>
+                                 
                               </ul>
-                          </div>
+                          </div> -->
                       </div>
                   </div>
               </section>
@@ -63,16 +73,23 @@
                       <div class="row">
                           <div class="col-md-6 col-sm-5">
                             </div>
-                          <div class="col-md-6 col-sm-7">
+                          <!-- <div class="col-md-6 col-sm-7">
                               <ul class="primary-navbar footer-menu" style="margin-top:-61px;">
+                                   <li><a type="button" class="g-signin2" data-onsuccess="onSignIn" mdbWavesEffect><span class="google-icon"></span> <span class="google-text">Sign in with Google</span></a></li> 
                                   <li> <a href="#">Contact Us </a> </li>
                                   <li> <a href="#">Term Of Use  </a> </li>
                                   <li> <a href="#">Site Map  </a> </li>
                                   <li> <a href="#">Privacy Policy</a> </li>
+                                  <li *ngIf ="currentuser"><a class="logout" (click)="Logout()"> LogOut </a></li> 
                               </ul>
-                          </div>
+                              <div class="fb-login-button" data-width="2px" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"></div> 
+                          </div> -->
+                          <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
                       </div>
                   </div>
               </section>
           </footer>
+
+
+          
           <!-- /FOOTER -->

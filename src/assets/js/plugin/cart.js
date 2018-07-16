@@ -1,7 +1,6 @@
 var check = false;
 
 function changeVal(el) {
-  
   var qt = parseFloat(el.parent().children(".qt").html());
   var price = parseFloat(el.parent().children(".price").html());
   var eq = Math.round(price * qt * 100) / 100;
@@ -31,12 +30,9 @@ function changeTotal() {
   $(".subtotal span").html(price);
   $(".tax span").html(tax);
   $(".total span").html(fullPrice);
-  $(".cartsubtotal span").html(fullPrice);
-  $(".clr-txt span").html(fullPrice);
 }
 
 $(document).ready(function(){
-changeTotal();
   
   $(".remove").click(function(){
     var el = $(this);
@@ -58,14 +54,12 @@ changeTotal();
   });
   
   $(".qt-plus").click(function(){
-    //alert($(this).parent().children(".qt").html(parseInt($(this).parent().children(".qt").html())))
     $(this).parent().children(".qt").html(parseInt($(this).parent().children(".qt").html()) + 1);
     
     $(this).parent().children(".full-price").addClass("added");
     
     var el = $(this);
-    window.setTimeout(function(){el.parent().children(".full-price").removeClass("added"); 
-    changeVal(el);}, 150);
+    window.setTimeout(function(){el.parent().children(".full-price").removeClass("added"); changeVal(el);}, 150);
   });
   
   $(".qt-minus").click(function(){

@@ -1,0 +1,133 @@
+<app-header></app-header>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+
+<!-- Headings -->
+<section class="deals sec-space light-bg">
+  <img alt="" src="assets/img/extra/sec-img-3.png" class="right-bg-img" />
+  <img alt="" src="assets/img/extra/sec-img-4.png" class="left-bg-img" />
+
+  <div class="container rel-div">
+    <div class="title-wrap row" style="margin-top: 20%;">
+      <h2 class="section-title">
+        <strong>Register
+          <img style="left: 70px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
+      </h2>
+     
+      <h4 class="sub-title">
+        <span>SIMRAN FRESH</span>
+      </h4>
+    </div>
+  </div>
+</section>
+<!-- Heading Ends -->
+
+
+
+<div class="row" style="margin-bottom: 5%;">
+  <div class="container">
+    <div class="col-md-6">
+      <div class="main-logo">
+        <img src='assets/img/logo/simran.png'>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="comp">
+        <!-- <form>  -->
+        <!-- <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="fb-login-button" data-width="300px" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false"
+                data-auto-logout-link="true" data-use-continue-as="false"></div>
+            </div>
+          </div>
+          <div style="text-align: center; font-size: 15px; font-weight: 1000; margin:2%;">OR</div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div id="googleBtn">Google</div>
+            </div>
+          </div> 
+          <div style="text-align: center; font-size: 15px; font-weight: 1000; margin:2%;">OR</div>-->
+      
+        
+        <form [formGroup]="authform">
+           
+          <div class="form-group">
+            <input type="text" [(ngModel)]="register.MobileNo" onkeypress="return event.charCode>47 && event.charCode<58" name="mobile" placeholder="Mobile No (User Id)" class="form-control" maxlength="10"
+              formControlName="MobileNo">
+          </div>
+          <p class="imp">*mandatory</p>
+          <p style="color:red;" *ngIf="authform.controls.MobileNo.hasError('required') && authform.controls.MobileNo.touched">*Mobile No. is required!</p>
+          <p style="color:red;" *ngIf="authform.controls.MobileNo.hasError('minlength') && authform.controls.MobileNo.touched">*Enter Valid Mobile No..!!</p>
+         
+          <div class="form-group">
+            <input type="text" onkeypress="return event.charCode>96 && event.charCode<123" [(ngModel)]="register.FullName" name="fullname" placeholder="Full Name" class="form-control" formControlName="FullName">
+          </div>
+          <p class="imp">*mandatory</p>
+          <p style="color:red;" *ngIf="authform.controls.FullName.hasError('required') && authform.controls.FullName.touched">*Name is required</p>
+
+          <div class="form-group">
+            <input type="text" [(ngModel)]="register.UserName" style="margin-top: 5%;" name="username" placeholder="Email" class="form-control"
+              formControlName="Email">
+          </div>
+          <p style="color:red;" *ngIf="authform.controls.Email.hasError('pattern') && authform.controls.Email.touched">*Enter Valid Email!!</p>
+         
+          <div class="form-group">
+            <input type="password" [(ngModel)]="register.UserPassword" name="password" placeholder="Password" class="form-control" formControlName="Password"
+              required>
+          </div>
+          <p class="imp">*mandatory</p>
+          <p style="color:red;" *ngIf="authform.controls.Password.hasError('minlength') && authform.controls.Password.touched">*Minimum 6 characters password is required!</p>
+          <p style="color:red;" *ngIf="authform.controls.Password.hasError('maxlength') && authform.controls.Password.touched">*Maximum 16 characters password is allowed!</p>
+          <p style="color:red;" *ngIf="authform.controls.Password.hasError('required') && authform.controls.Password.touched">*Password is required!</p>          
+          
+          <div class="form-group">
+            <input type="password" [(ngModel)]="register.ConfirmPassword" name="confirm" placeholder="Confirm Password" class="form-control"
+              formControlName="ConfirmPassword" required>
+          </div>
+          <p class="imp">*mandatory</p>
+          <p style="color:red;" *ngIf="authform.controls.ConfirmPassword.hasError('required') && authform.controls.ConfirmPassword.touched">*Please confim you'r password!</p>
+
+          <!-- <div class="form-group">
+              <select style="padding-top:5px;" class="form-control" formControlName="Z" [(ngModel)]="register.ZoneId">
+                  <option value=''>--SELECT YOUR LOCALITY--</option>
+                  <option *ngFor="let opt of Zone" [(ngValue)]="opt.ZoneId">{{opt.ZoneName}}</option>
+                </select>
+          </div>
+          <p class="imp">*mandatory</p>
+
+          <div class="form-group">
+          <select style="padding-top:5px;" class="form-control" formControlName="B" [(ngModel)]="register.BranchId">
+            <option value=''>--SELECT BRANCH--</option>
+            <option *ngFor="let opt of Branch" [(ngValue)]="opt.BranchId">{{opt.BranchName}}</option>
+          </select>
+          </div>
+          <p class="imp">*mandatory</p> -->
+
+
+          <div class="form-group">
+              <input type="text" [(ngModel)]="register.Address" name="confirm" placeholder="Address" class="form-control"
+                formControlName="Address" required>
+            </div>
+            <p class="imp">*mandatory</p>
+            <p style="color:red;" *ngIf="authform.controls.Address.hasError('required') && authform.controls.Address.touched">*Please provide address!</p>
+          <div class="form-group">
+              <select style="padding-top:5px;" class="form-control" placeholder="--City--" formControlName="C" [(ngModel)]="register.CityId">
+                  <option vlaue=''>--SELECT CITY--</option>
+                  <option class="form-control" *ngFor="let opt of City" [(ngValue)]="opt.Id">{{opt.Name}}</option>
+                </select>
+          </div>
+          <p class="imp">*mandatory</p>
+          <p style="color:red;" *ngIf="authform.controls.C.hasError('required') && authform.controls.C.touched">*City is required!</p>
+
+          <button (click)="registerUser()" type="submit" style="margin-top: 6%;">Register</button>
+          <div style="text-align: center; font-size: 15px; margin: 2%; font-weight: 1000">or</div>
+          <button (click)="login()" type="submit">Login to your account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>

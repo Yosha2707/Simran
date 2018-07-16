@@ -1,0 +1,17 @@
+.form-control{
+    width: 100%;
+}
+
+.form-control .GI{
+    width: 200%;
+}
+ .nav-tabs{
+    cursor: pointer;
+    border-bottom: 0;
+}
+
+@media screen and(min-width:600px){
+    .btngreen{
+        width:10%;
+    }
+}

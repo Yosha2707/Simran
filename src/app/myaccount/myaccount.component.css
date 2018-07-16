@@ -1,0 +1,30 @@
+
+
+.orders{
+    height:90%; 
+    width:44%;
+}
+
+.wishlist{
+    height:87%;
+     margin-right:2%;
+}
+
+
+.banner-box{
+    border:0;
+}
+
+.toprow{
+    margin-top:10%;
+}
+
+.prod-banner.green-banner {
+    background-color: #ffffff;
+}
+ @media screen and (max-width: 600px) {
+  .toprow{
+      margin-top:25%;   
+  }
+     
+  } 

@@ -1,0 +1,296 @@
+<!-- 
+ <div class="row">
+    <div class="topnav" id="myTopnav">
+        <ul>
+        <li *ngIf="currentuser==null">
+        <a routerLink="/login" style="margin-right: 9%;" role="button" aria-haspopup="true" >Login</a>                                            
+        </li> 
+        <li *ngIf="currentuser!=null" style="margin-right: 9%;"><a (click)="Logout()">Logout</a></li>
+        <li><a type="button" class="btn-floating btn-lg btn-fb"><i class="fa fa-facebook"></i></a></li>
+        <li><a type="button" class="btn-floating btn-lg btn-tw"><i class="fa fa-twitter"></i></a></li>
+        <li><a type="button" class="btn-floating btn-lg btn-gplus"><i class="fa fa-google-plus"></i></a></li>
+        <li><a type="button" class="btn-floating btn-lg btn-li"><i class="fa fa-linkedin"></i></a></li>
+        <li><a type="button" class="btn-floating btn-lg btn-ins"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+    </div>
+ </div>        -->
+
+<!-- <b><hr style="margin-top: -3px;"></b>-->
+<!-- <div class="row">
+  <main class="wrapper home-wrap" style="height: 41px;">
+    <header class="main-subheader">
+      <div class="container-fluid rel-div" style="margin-top: -11px;">
+        <div class="col-md-3 col-sm-3 col-xs-3">
+            <a href="#" title="Order on phone or whatsapp..!">
+                <img style="width:20px;" src='assets/img/extra/w.png'>  +91 8717928888, +91 8717918888
+            </a>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-8 responsive-menu">
+          <div class="responsive-toggle fa fa-bars"> </div>
+          <nav id="primary-navigation">
+            <ul style="display:inline-flex; float: right; margin-top: -12px;" class=" social-network social-circle">
+                  <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a href="#" class="icoLinkedin" title="Android Comming Soon"><i class="fa fa-android"></i></a></li>
+                  <li><a href="#" class="icoGoogle"  title="ios Comming Soon"><i class="fa fa-apple"></i></a></li>
+              <li>
+                <a class="btn btn-lg" (click)="account()"  role="button" style="font-size: 15px; cursor: pointer;">
+                    My Account <b style="font-weight: 900;">|</b>
+                </a>
+              </li>
+              <li *ngIf="currentuser==null">
+                  <a style="cursor: pointer; font-size: 15px; margin-top: 10px; margin-left: 50px;" routerLink="/login">
+                  Login
+                  </a>
+                </li>
+                <li *ngIf="currentuser!=null">
+                  <a style="cursor: pointer; font-size: 15px; margin-top: 10px; margin-left: 50px;" (click)="Logout()">
+                    Logout
+                  </a>
+                </li>
+            </ul>
+
+          </nav>
+        </div>
+        <div class="col-md-1 cart-megamenu text-center">
+          <div class="cart-hover" style="margin-top: 0;">
+            <a href="#cart-pop">
+              <span class="glyphicon glyphicon-shopping-cart"></span>
+            </a>
+            <span class="cnt">{{parentCount}}</span>
+            <ul id="cart-pop" *ngIf="parentCount > 0" class="pop-up-box cart-popup">
+              <li class="cart-list" *ngFor="let data of productCartArray; let i = index">
+                <div class="cart-img">
+                  <img src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}' alt=""> </div>
+                <div class="cart-title">
+                  <div class="fsz-16">
+                    <a href="#">
+                      <span class="light-font"> organic </span>
+                      <strong>{{data.ProductName}}</strong>
+                    </a>
+
+                  </div>
+                  <div class="price">
+                    <strong class="clr-txt">₹ {{data.Price}} </strong>
+                  </div>
+                </div>
+                <div class="close-icon">
+                  <a (click)="remove(data.Id)">
+                    <i class="fa fa-close clr-txt"></i>
+                  </a>
+                </div>
+              </li>
+
+              <li class="cart-list sub-total">
+                <div class="pull-left">
+                  <strong>Total</strong>
+                </div>
+                <div class="pull-right">
+                  <strong>
+                    <span class="clr-txt">₹ {{total}}</span>
+                  </strong>
+                </div>
+              </li>
+              <li class="cart-list buttons">
+                <div class="pull-left">
+                  <a routerLink="/cart" class="theme-btn-sm-2">View Cart</a>
+                </div>
+                <div class="pull-right">
+                  <a routerLink="/out" class="theme-btn-sm-3"> Checkout </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="responsive-toggle fa fa-bars"> </div>
+        </div>
+      </div>
+    </header>
+  </main>
+</div> -->
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<main class="wrapper home-wrap" style="height: 45px;">
+<header class="main-header h-hide" style="padding-top: 0px;">                  
+  <div class="container-fluid rel-div">
+      <div class="col-lg-4 col-sm-8" style="margin-top: 15px;">
+            <a style="font-size:12px;" title="Order on phone or whatsapp..!">
+              <!-- <img style="width:20px;" src='assets/img/extra/w.png'>  --><b>Order on phone or whatsapp +91 8717928888, +91 8717918888</b>
+          </a>
+      </div>
+
+      <div class="col-lg-6 responsive-menu">  
+          <div class="responsive-toggle fa fa-bars"> </div>
+          <nav class="fix-navbar" id="primary-navigation">            
+            <ul style="display:inline-flex; float: right;" class="social-network social-circle">
+              <!-- <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#" class="icoLinkedin" title="Android Comming Soon"><i class="fa fa-android"></i></a></li>
+              <li><a href="#" class="icoGoogle"  title="ios Comming Soon"><i class="fa fa-apple"></i></a></li> -->
+          <li>
+            <a class="btn btn-lg" (click)="account()"  role="button" style="font-size: 15px; cursor: pointer;">
+                My Account <b style="font-weight: 900;">|</b>
+            </a>
+          </li>
+          <li *ngIf="currentuser==null">
+              <a style="cursor: pointer; font-size: 15px; margin-top: 10px; margin-left: 50px;" routerLink="/login">
+              Login
+              </a>
+            </li>
+            <li *ngIf="currentuser!=null">
+              <a style="cursor: pointer; font-size: 15px; margin-top: 10px; margin-left: 50px;" (click)="Logout()">
+                Logout
+              </a>
+            </li>
+        </ul>                           
+          </nav>
+      </div>
+
+      <div class="col-lg-2 col-sm-4 cart-megamenu">
+          <div class="cart-hover">
+              <a routerLink="/cart"> <img alt="" src="assets/img/icons/cart-icon.png" /> </a>
+              <span class="cnt">{{parentCount}}</span>
+              <!-- <ul class="pop-up-box cart-popup">
+                  <li class="cart-list" *ngFor="let data of productCartArray; let i = index">
+                      <div class="cart-img"> <img src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}'> </div>
+                      <div class="cart-title">
+                          <div class="fsz-16">
+                              <a href="#"><strong>{{data.ProductName}}</strong></a>
+                          </div>
+                          <div class="price"> 
+                              <strong class="clr-txt">₹ {{data.Price}} </strong>
+                          </div>
+                      </div>
+                      <div class="close-icon">
+                        <a (click)="remove(data.Id)">
+                          <i class="fa fa-close clr-txt"></i>
+                        </a>
+                      </div>
+                  </li>
+
+           
+           
+
+                  <li class="cart-list sub-total">
+                      <div class="pull-left"> 
+                          <strong>Subtotal</strong>
+                      </div>
+                      <div class="pull-right"> 
+                          <strong class="clr-txt">₹ {{total}}</strong>
+                      </div>
+                  </li>
+                  <li class="cart-list buttons">
+                      <div class="pull-left"> 
+                          <a routerLink="/cart" class="theme-btn-sm-2">View Cart</a>
+                      </div>
+                      <div class="pull-right"> 
+                          <a routerLink="/out" class="theme-btn-sm-3"> Checkout </a>
+                      </div>
+                  </li>
+              </ul> -->
+          </div>
+          <!-- <div class="responsive-toggle fa fa-bars"> </div> -->
+      </div>
+
+  </div>  
+</header>
+</main>
+
+
+
+
+ <div class="row">
+  <main class="wrapper home-wrap">
+    <header class="main-header" style="background: rgba(0,0,0,0.44); padding: 0px 10px;">
+      <div class="container-fluid rel-div" style="padding-top: 30px;">
+        <div class="col-md-3 logo-div">
+          <div class="main-logo">
+            <a style="cursor: pointer;" (click)="home()">
+              <img alt="" src="assets/img/logo/simran.png" class="logo" /> </a>
+            <!-- <span class="medium-font" style="color: white;">SIMRAN FRESH</span> -->
+          </div>
+        </div>
+        <div class="col-md-9 responsive-menu">
+          <div class="responsive-toggle fa fa-bars"> </div>
+          <nav class="fix-navbar" id="primary-navigation" style="margin-top: -28px;">
+            <ul class="primary-navbar">
+                <li style="text-align: center!important; display: inline-block; margin-right: 2%;" routerLinkActive="active current">
+                    <img class="imgclass img-circle" (click)="home()" style="width: 7%; cursor: pointer;" src="assets/img/icons/home.png">
+                    <ul style="text-align: center;" class="primary-navbar">
+                        <li routerLinkActive="active current">
+                          <a style="color: white; cursor: pointer;" (click)="home()">Home</a>
+                        </li>
+                    </ul>
+                </li>
+                <li style="text-align: center!important; display: inline-block; margin-right: 2%;" routerLinkActive="active current" *ngFor="let data of prodCategory ; let i=index">
+                  <img class="imgclass img-circle" [routerLink]="['/products', data.Id]" style="cursor:pointer; width: 7%;" src="{{data.objAttachmentsViewModel.AbsoluteURL}}">
+                  <ul style="text-align: center;" class="primary-navbar">
+                    <li routerLinkActive="active current">
+                      <a style="color: white;" [routerLink]="['/products', data.Id]">{{data.Name}} </a>
+                    </li>
+                  </ul>
+                </li>
+            </ul>
+           
+          </nav>
+        </div> 
+         <!-- <div class="col-md-1 cart-megamenu text-center">
+            <div class="cart-hover" style="margin-top: 0;">
+                <a routerLink="/cart" >
+                  <span class="glyphicon glyphicon-shopping-cart"></span>
+                </a>
+                <span class="cnt" style="color: white;">{{parentCount}}</span>
+                <ul *ngIf="parentCount > 0" class="pop-up-box cart-popup">
+                    <li class="cart-list" *ngFor="let data of productCartArray; let i = index">
+                        <div  class="cart-img">
+                        <img src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}' alt=""> </div>
+                        <div class="cart-title">
+                        <div class="fsz-16">
+                            <a href="#">
+                            <span class="light-font"> organic </span>
+                            <strong>{{data.ProductName}}</strong>
+                             </a>
+
+                        </div>
+                        <div class="price">
+                            <strong class="clr-txt">₹ {{data.Price}} </strong>
+                        </div>
+                        </div>
+                        <div class="close-icon">
+                        <a (click)="remove(data.Id)">
+                            <i class="fa fa-close clr-txt"></i>
+                        </a>
+                        </div>
+                    </li>
+
+                    <li class="cart-list sub-total">
+                        <div class="pull-left">
+                        <strong>Total</strong>
+                        </div>
+                        <div class="pull-right">
+                        <strong>
+                            <span class="clr-txt">₹ {{total}}</span>
+                        </strong>
+                        </div>
+                    </li>
+                    <li class="cart-list buttons">
+                        <div class="pull-left">
+                        <a routerLink="/cart" class="theme-btn-sm-2">View Cart</a>
+                        </div>
+                        <div class="pull-right">
+                        <a routerLink="/out" class="theme-btn-sm-3"> Checkout </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>-->
+             <div class="responsive-toggle fa fa-bars"> </div> 
+     <!--    </div>  -->
+
+
+       </div>
+    </header>
+  </main>
+</div> 

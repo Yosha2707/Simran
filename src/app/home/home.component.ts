@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  cartCoount;
+  public loading = false;
+  constructor() {
+    this.cartCoount = localStorage.getItem('cartcount');
+   }
 
   ngOnInit() {
   }

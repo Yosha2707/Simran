@@ -1,4 +1,101 @@
 .vegeImage{
     widows: 70%;
-    height : 170px!important;
+    /* height : 170px!important; */
+}
+
+
+
+.poo{
+    border-radius: 2em;
+    display: table;
+    left: 0;
+    margin: auto;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    visibility: hidden;
+    z-index: 1;
+
+    transform: translateY(-65px);
+    -webkit-transform: translateY(-65px);
+}
+
+.poo > a {
+    background-color: #fff;
+    color: #dedede;
+    font-size: 20px;
+    height: 45px;
+    line-height: 45px;
+    width: 60px;
+}
+
+.poo > a:first-child {
+    border-radius: 2em 0 0 2em;
+}
+
+.poo > a:last-child {
+    border-radius: 0 2em 2em 0;
+}
+
+.poo> a:hover {
+    background-color: #92d2a7;
+    color: #fff;
+}
+
+.poo> a:visited {
+    background-color: red;
+    color: #fff;
+}
+
+.poo > a:nth-child(2n):hover {
+    background-color: #79d1d6;
+}
+
+.product-box .poo {
+    padding-left: 26%;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(35px);
+    -webkit-transform: translateY(35px);
+}
+
+.fa fa-heart:active:focus{
+color: red;
+}
+
+.product-media > a .prod-img {
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.title.wrap{
+    margin-bottom: 0px;
+}
+
+.product-box{
+    border: 1px solid whitesmoke;
+}
+
+.form-control{
+    background-color: white;
+}
+
+.form-control:focus{
+    background-color: white;
+}
+.main-header {
+    padding: 40px 10px;
+border-bottom: 1px solid lightgray;
+    transition: all 0.4s ease-in-out 0s;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+}
+
+h2{
+    margin-top: 0px;
 }

@@ -1,0 +1,141 @@
+.vegeImage{
+    widows: 70%;
+    /* height : 170px!important; */
+}
+
+
+
+.poo{
+    border-radius: 2em;
+    display: table;
+    position: absolute;
+    right: 8px;
+    top: -21%;
+    visibility: hidden;
+    z-index: 1;
+
+    transform: translateY(-65px);
+    -webkit-transform: translateY(-65px);
+}
+
+.poo > a {
+    color: black;
+    font-size: 20px;
+    height: 45px;
+    line-height: 45px;
+    width: 60px;
+}
+
+.poo > a:first-child {
+    border-radius: 2em 0 0 2em;
+}
+
+/* .poo > a:last-child {
+    border-radius: 0 2em 2em 0;
+} */
+
+.poo> a:hover {
+    color: red;
+}
+
+/* .poo> a:visited {
+    background-color: red;
+    color: #fff;
+}
+
+.poo > a:nth-child(2n):hover {
+    background-color: #79d1d6;
+} */
+
+.product-box .poo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(35px);
+    -webkit-transform: translateY(35px);
+}
+
+
+
+.product-media > a .prod-img {
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.title.wrap{
+    margin-bottom: 0px;
+}
+
+.product-box{
+    border: 1px solid whitesmoke;
+}
+
+.form-control{
+    background-color: white;
+    /* border-radius: 15px;
+    height: 10px; */
+}
+
+.form-control:focus{
+    background-color: white;
+}
+
+h2{
+    margin-top: 0px;
+}
+
+.extra{
+    margin-top: -6%;
+    font-size: 18px;
+}
+.shopcart{
+   /* padding-left: 5%;  */
+   font-size: 20px;
+   margin-right: 6px;
+}
+
+.shopheart{
+    /* padding-left: 7%; */
+    font-size: 20px; 
+ }
+
+ .desc{
+    cursor:pointer;
+     margin-left:1px;
+      margin-right:1px;
+       font-size: 10px;
+        margin-top: -10px;
+         margin-bottom: 10px;
+         text-overflow: ellipsis;
+         overflow: hidden;
+         white-space: nowrap;
+ }
+
+ .namedesc{
+     cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+ }
+
+
+ .cal{
+    width: 66px;
+    border-radius: 6px;
+    border: 1px solid green;
+    text-align: center;
+ }
+
+ .lab{
+     font-size: 10px;
+     margin-left: 5px;
+ }
+
+ .disable {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: underline;
+}

@@ -1,0 +1,57 @@
+<app-header></app-header>
+ 
+<!-- Headings -->
+<section class="deals sec-space light-bg">
+    <img alt="" src="assets/img/extra/sec-img-3.png" class="right-bg-img" />
+    <img alt="" src="assets/img/extra/sec-img-4.png" class="left-bg-img" />
+  
+    <div class="container rel-div">
+      <div class="title-wrap row" style="margin-left:2%; margin-top: 9%;">
+        <h2 class="section-title">
+          <strong>Ordered Items
+            <img style="left: 160px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
+        </h2>
+       
+        <h4 class="sub-title">
+          <span>SIMRAN FRESH</span>
+        </h4>
+      </div>
+    </div>
+  </section>
+  <!-- Heading Ends -->
+
+ <!-- Random Products Starts-->
+  <section class="">
+    <div class="container"> 
+        <!-- Random Products -->
+        <div class="row">
+            <div class="col-md-4 pt-50"  *ngFor="let data of info">
+                <div class=""> 
+                    <div class="item"> 
+                        <div class="random-prod"> 
+                            <div class="random-img"> 
+                                <img alt="" src="assets/img/extra/random-1.png" />
+                            </div>
+                            <div class="random-text"> 
+                                <h3 class="title-1 no-margin"> <a href="#"><strong>{{data.ProductName}} </strong> </a> </h3>
+                                <span class="divider"></span>
+                                <div class="price"> 
+                                    <strong class="clr-txt">{{data.Quantity}} {{data.UnitName}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <button class="btn">Cancel Order</button>
+        </div>
+
+
+    </div>
+</section>
+<!-- Random Products Ends -->
+
+
+<app-footer></app-footer>

@@ -1,0 +1,31 @@
+{
+  "name": "google-signin-button",
+  "version": "2.0.0",
+  "description": "Custom Google sign-in buttons",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appellation/google-signin-button.git"
+  },
+  "author": "Will Nelson <nelson.will@live.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/appellation/google-signin-button/issues"
+  },
+  "homepage": "https://github.com/appellation/google-signin-button#readme",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.2.1"
+  },
+  "main": "dist/buttons.min.css",
+  "keywords": [
+    "google",
+    "signin"
+  ]
+}

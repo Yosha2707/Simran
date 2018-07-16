@@ -1,0 +1,17 @@
+.section-title{
+    letter-spacing: 7px;
+    padding-left: 50%;
+    
+}
+.btn-danger{
+    margin-left: 14%;
+    width: 39%;
+}
+
+.btn-sucess{
+    background-color: #467612;
+     color: white;
+     margin-left: 3%;
+     width: 39%;
+}
+

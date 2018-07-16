@@ -1,0 +1,102 @@
+<app-header></app-header>
+<!-- Headings -->
+<section class="deals sec-space light-bg">
+  <img alt="" src="assets/img/extra/sec-img-3.png" class="right-bg-img" />
+  <img alt="" src="assets/img/extra/sec-img-4.png" class="left-bg-img" />
+
+  <div class="container rel-div">
+    <div class="title-wrap row" style="margin-top: 20%;">
+      <h2 class="section-title">
+        <strong>Sign In
+          <img style="left: 23px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
+      </h2>
+
+      <h4 class="sub-title">
+        <span>SIMRAN FRESH</span>
+      </h4>
+    </div>
+  </div>
+</section>
+<!-- Heading Ends -->
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="main-logo">
+        <img src='assets/img/logo/simran.png'>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="comp">
+        <form class="col s12 white" style="margin-bottom: 15%;">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="UserName" name="UserName" placeholder="UserName" class="form-control"
+              required>
+          </div>
+          <br>
+          <div class="form-group">
+            <input type="password" style="margin-bottom: 20px;" [(ngModel)]="Password" name="Password" placeholder="Password" class="pass form-control"
+              required>
+          </div>
+          <div class="form">
+            <label class="checkbox-inline" style="margin-bottom: 20px; float: left;">
+              <input (change)="toggleEditable($event)" type="checkbox">
+              <b>Remember Me..!</b>
+            </label>
+          </div>
+          <button (click)="OnLogin()" type="submit">Login</button>
+          <div style="text-align: center; font-size: 15px; margin: 2%; font-weight: 1000">OR</div>
+          <button (click)="signup()" type="submit">Register</button>
+          <div style="text-align: right; padding-top: 5%; letter-spacing: 1px;">
+            <a href="#forgot" data-toggle="modal">
+              <strong>Forgot Password?</strong>
+            </a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="col-md-3 col-sm-3 col-xs-3"></div>
+<div class="col-md-6 col-sm-6 col-xs-6">
+  <div class="modal fade" id="forgot">
+    <div class="modal-dialog modal-lg product-modal">
+      <div class="modal-content" style="margin-top:25%;">
+        <a aria-hidden="true" data-dismiss="modal" class="sb-close-btn close" href="#">
+          <i class=" fa fa-close"></i>
+        </a>
+       <div class="row">
+         <div class="col-md-4 col-sm-4 col-xs-4"></div>
+         <div class="col-md-4 col-sm-4 col-xs-4">
+          <img style="width:60%;margin-top: 20%;" src='assets/img/logo/simran.png'>
+         </div>
+         <div class="col-md-4 col-sm-4 col-xs-4"></div>
+
+       </div>
+        <div class="product-single pb-50 clearfix">
+          <div class="col-lg-12 pt-50">
+  
+            <p style="text-align:center; color:lightslategrey;">
+              An Email will be sent to <b>registered email</b> with a link to change the password.
+            </p>
+  
+            <div class="product-content block-inline">
+              <input class="form-control" type="text" [(ngModel)]="email" placeholder="Enter Your Registered Email" #q>
+            </div>
+          </div>
+          <div class="col-lg-12 pt-50">
+            <a class="btn" (click)="forgotPassword(email)" style="float:right; margin:2%; background-color: green; color:white;" role="button">Submit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-3 col-xs-3"></div>
+</div>
+<!-- Modal ends -->
+
+<app-footer></app-footer>
