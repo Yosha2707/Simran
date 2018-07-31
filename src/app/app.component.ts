@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -18,4 +18,13 @@ export class AppComponent {
         }
     }, 16);
 }
+
+
+@HostListener('window:popstate', ['$event'])
+onPopState(event) {
+  this.refresh();
+}
+refresh(): void {
+    window.location.reload();
+  }
 }

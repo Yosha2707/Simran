@@ -119,7 +119,6 @@ img {
 }
 .col-md-6{
   text-align: center;
-  margin-top: 5%;
 }
 .form-control{
   height: 33px;
@@ -127,4 +126,12 @@ img {
 
 select:focus{
   background-color: white;
+}
+
+.container{
+  margin-top: 5%;
+}
+
+.our-space{
+  margin-top: -5%;
 }

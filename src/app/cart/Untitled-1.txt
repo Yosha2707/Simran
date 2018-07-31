@@ -1,0 +1,106 @@
+<app-header [parentCount]="cartCoount" [CartDD]="cartloadData"></app-header>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+<!-- Headings -->
+<section class="deals sec-space light-bg our-space">
+  <img alt="" src="assets/img/extra/sec-img-3.png" class="right-bg-img" />
+  <img alt="" src="assets/img/extra/sec-img-4.png" class="left-bg-img" />
+
+  <div class="container rel-div">
+<div class="col-md-3 col-sm-1 col-xs-1"></div>
+<div class="col-md-6 col-sm-10 col-xs-10 head">
+    <div class="title-wrap row" style="margin-top: 20%;">
+        <h2 class="section-title">
+          <strong>Wishlist
+            <img style="left: 117px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
+        </h2>
+  
+        <h4 class="sub-title">
+          <span>SIMRAN FRESH</span>
+        </h4>
+      </div>
+</div>
+<div class="col-md-3 col-sm-1 col-xs-1"></div>
+  </div>
+</section>
+<!-- Heading Ends -->
+
+<div class="organic-all sec-space-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <div *ngIf="wishlist?.length == 0">
+              <a (click)="home()">
+                  <img style="text-align:center; margin-top:5%;" src='assets/img/extra/emptywish.jpg'>
+              </a> 
+              </div>
+        <div class="tab-content organic-content">
+          <div id="product-tab-1" class="tab-pane fade active in">
+            <div class="product-slider-1 dots-1">
+              <div class="item col-md-3 col-sm-6 col-xs-12" *ngFor="let data of wishlist; let i = index">
+                <div class="product-box" style="min-height: 350px;">
+                  <div class="product-media">
+                    <img class="prod-img vegeImage" style="width:350px;height:200px;" alt="" src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}'
+                    />
+                  </div>
+                  <div class="product-caption">
+                    <h3 class="product-title namedesc" tooltip="{{data.Name}}" placement="top">
+                      <span class="light-font"> </span>
+                      <strong>{{data["ProductName"]}}</strong>
+                    </h3>
+                    <div class="price">
+                      <strong class="clr-txt">₹ {{data["Price"]}}/ {{data.UnitName}}</strong>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row" style="height: 10px;" class="desc" tooltip="{{data.Description}}" placement="top">
+                    {{data.Description}}
+                  </div>
+                  <div *ngIf="data.IsOutOfStock==true">
+                    <div class="row">
+                      <input type="text" value="Out Of Stock" class="btn btn-danger" readonly>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="row" style="margin-left: 0; margin-right: 0;">
+                      <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="form-group">
+                          <label class="lab">Qty</label>
+                          <div *ngIf="data.UnitName=='Pcs.'">
+                            <input type="text" onkeypress="return event.charCode >= 48" class="cal numbersOnly" [(ngModel)]="data.Quantity" maxlength="2" (keyup)="calculateProductPrice($event.target.value, data.Price, i)"
+                            required placeholder="0">
+                          </div>
+                           <div *ngIf="data.UnitName=='Kg.'">
+                            <input type="text"  onkeypress="return event.charCode >= 46" class="cal numbersOnly" name="" maxlength="6" [(ngModel)]="data.Quantity" (keyup)="calculateProductPrice($event.target.value, data.Price, i)"
+                            required placeholder="0">
+                           </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="form-group">
+                          <label class="lab">Total</label>
+                          <input type="text" class="cal" [(ngModel)]="data.finalPrice" readonly>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-4 col-xs-4" style="margin-top: 25px;">
+                        <a *ngIf="data.Quantity > 0" (click)="cartdata(data, data.Quantity)" class="fa fa-shopping-cart shopcart"></a>
+                        <a *ngIf="data.Quantity == null || data.Quantity == 0 || data.Quantity == undefined || data.Quantity == ''" class="fa fa-shopping-cart shopcart disable"></a>
+                        <a (click)="remove(data.Id)" class="fa fa-remove shopheart" title="Remove from wishlist"></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<app-footer></app-footer>

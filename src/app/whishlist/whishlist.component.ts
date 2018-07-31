@@ -73,6 +73,9 @@ preview: any = [{
 imgPreview: any;
 repeatCart = false;
 array:any = [];
+length;
+prevfinalprice;
+read = false;
   constructor(private toastr: ToastrService, public userService: DataService, private http: Http, private router : Router) { 
     this.cartCoount = localStorage.getItem('cartcount');
   }
@@ -85,7 +88,7 @@ array:any = [];
       (res: Response) => {
      this.list = res.json();
      this.wishlist = this.list.Response;
-     console.log(this.wishlist);
+     
      this.loading=false;
       });
   }
@@ -118,18 +121,47 @@ array:any = [];
   this.loading = false;
   }
 
+  calculateProductPricePrev(quant, price, index) {
+    if (quant > 99) {
+      this.toastr.error("Maximum Quantity 99 Kg!")
+    } else {
+      var final = (+quant) * price || 0;
+      this.prevfinalprice = final;
+    }
+
+  }
+  reset(){
+    this.prevfinalprice = 0
+   // this.showModal = false;
+  }
+
+
+
 
   productPreview(data) {
-   this.userService.productPrev(data).subscribe(
-     (res:Response) => {
-       console.log(res);
-    this.veg = res;
-    this.preview = this.veg.Response;
-    console.log(this.preview);
-    this.imgPreview = this.preview.objAttachmentsViewModel.AbsoluteURL;
-   });
-  
-  }
+   // this.showModal = true;
+    this.userService.productPrev(data).subscribe(
+      (res:Response) => {
+     this.veg = res;
+     this.preview = this.veg.Response;
+     console.log("*****")
+     console.log(this.preview)
+     this.imgPreview = this.preview.objAttachmentsViewModel.AbsoluteURL;
+     if(this.preview.Description!=null){
+      this.length = this.preview.Description.replace(/\s/g, "").length;
+     }
+    
+    });
+   
+   }
+   readmore(){
+   
+    this.read = true;
+    this.length = 0;  
+    }
+    readless(){
+      this.read = false;
+    }
 
   refresh(): void {
     window.location.reload();
@@ -144,7 +176,7 @@ array:any = [];
 this.loading = true;
     this.userService.deleteUser(id).then(
       res => { // Success
-        this.refresh(); 
+        this.ngOnInit(); 
         this.loading = false;
       }
     );

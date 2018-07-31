@@ -37,6 +37,7 @@ img{
 .quanttotal{
     margin-left: -20px;
     margin-right: 2px;
+    margin-top: 5%;
 }
 
 .fsz-16{
@@ -44,6 +45,9 @@ img{
   
 }
 
+hi{
+    margin-top: -9%;
+}
 
 
 .initial{
@@ -263,15 +267,14 @@ h2{
         margin-top: 7px;
         padding-top: 3px;
         height: 25px;
-    }.modal{
-        margin-top: 8%;
-        overflow: hidden;
-        margin-left: 25%;
-        width: 50%;
-        display: block;
-        padding-right: 0;
-    }.close{
-        margin-right: 38%;
+     }
+     .text-area{
+        width: 30%;
+        text-align: center;
+    }.heading{
+        margin-top: -15%;
+    }.product-modal{
+        width: 600px;
     }
     
 }
@@ -279,6 +282,7 @@ h2{
     cursor:pointer;
         margin-top: -10px;
          margin-bottom: 25px;
+         height: 18px;
          /* text-overflow: ellip;
          overflow: hidden;
          white-space: nowrap; */
@@ -298,8 +302,8 @@ h2{
 }
  .namedesc{
      cursor: pointer;
+     color: black;
     text-overflow: ellipsis;
-    overflow: hidden;
     white-space: nowrap;
  }
  a{
@@ -318,19 +322,40 @@ h2{
     
     
 }
+
+div.collapsed {
+    overflow: hidden;
+}
 .desrow{
     margin-left: -27px;
 }
-::-webkit-input-placeholder { color: black; text-transform: uppercase; }
-::-moz-placeholder { color: black; text-transform: uppercase; }
-:-ms-input-placeholder { color: black; text-transform: uppercase; }
 
-@media screen and (max-width:360px){
+.above{
+    z-index: 999;
+    top: 0;
+
+}
+
+
+
+
+/* ::-webkit-input-placeholder { color: black; text-transform: uppercase; }
+::-moz-placeholder { color: black; text-transform: uppercase; }
+:-ms-input-placeholder { color: black; text-transform: uppercase; } */
+
+@media screen and (max-width:768px){
     .container {
         padding-right: 15px;
         padding-left: 0;
         margin-right: 0;
         margin-left: 0;
+    }.text-area{
+        width: 40%;
+        text-align: center;
+    }.heading{
+        margin-top: -13%;
+    }.mob{
+        display: none;
     }
 }
 
@@ -362,7 +387,10 @@ hr{
 }
 
 
-
+.textrow{
+    margin-top: 5%;
+    display: -webkit-box;
+}
 
 
 .hideContent {
@@ -384,4 +412,34 @@ hr{
 .show-more {
     padding: 10px 0;
     text-align: center;
+}
+
+.special{
+    margin-left: 2%;
+    text-align-last: center;
+}
+
+
+
+.disco{
+    font-size: 12px;
+    text-align: justify;
+    padding-right: 11%;
+    max-height: 45px;
+    overflow: hidden;
+}
+
+.dec{
+    font-size: 12px;
+    text-align: justify;
+    padding-right: 11%;
+}
+
+.colla{
+    font-size: 12px;
+    margin-left: 35%;
+    padding: 2%;
+    border-radius: 5px;
+    background-color: #e0e4a8;
+    cursor: pointer;
 }

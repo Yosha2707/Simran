@@ -34,6 +34,9 @@ import {
 declare var gapi: any;
 declare var $:any;
 import * as AOS from 'aos';
+import {CartComponent} from '../cart/cart.component'
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -45,7 +48,6 @@ export class HeaderComponent implements OnInit {
   scroll: boolean = false;
  // productCartArray = [];
   taxes;
-  isCollapsed = false;
   total;
   productQuantity = 1;
   Price;
@@ -64,51 +66,66 @@ export class HeaderComponent implements OnInit {
   yes = false;
   api = false;
   innerWidth;
+  isCollapsed = true;
   @Input()
   parentCount: number;
-
+dropdownContent;
   productCartArray: any = [];
 
   @Input()
   CartDD:any = [];
 
-  dropdown = document.getElementsByClassName("dropdown-btn");
+  
 
-  constructor(private router: Router,private http: Http, private userService:DataService) {
+  dropdown = document.getElementsByClassName("dropdown-btn");
+  caret = document.getElementsByClassName("fa-caret-down")
+  constructor(private router: Router,private http: Http, private userService:DataService, private toastr: ToastrService) {
 
     this.search();
+    // this.drop();
   }
 
-  drop(){
+  drop($event){
     for (var i = 0; i < this.dropdown.length; i++) {
-      this.dropdown[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-          dropdownContent.style.display = "none";
-        } else {
-          dropdownContent.style.display = "block";
-        }
-      });
+      this.dropdown[i].classList.remove("active");
+      this.dropdown[i].firstElementChild.classList.remove('fa-caret-up');
+      this.dropdown[i].firstElementChild.classList.add('fa-caret-down');
+      this.dropdown[i].nextElementSibling.classList.remove("show");
+      this.dropdown[i].nextElementSibling.classList.add("hide");
     }
+
+    if (!$event.target.classList.contains("active")){
+      $event.target.classList.toggle("active");
+      $event.target.firstElementChild.classList.toggle('fa-caret-up');
+      if ($event.target.nextElementSibling.classList.contains("hide")) {
+        $event.target.nextElementSibling.classList.remove("hide");
+        $event.target.nextElementSibling.classList.add("show");
+      } else {
+        $event.target.nextElementSibling.classList.remove("show");
+        $event.target.nextElementSibling.classList.add("hide");
+      }
+    }
+       
+    
+    // for (var i = 0; i < this.dropdown.length; i++) {
+    //   this.dropdown[i].addEventListener("click", function() {
+    
+
+    //     this.dropdownContent = this.nextElementSibling;
+    //     if (this.dropdownContent.style.display === "block") {
+    //       this.dropdownContent.style.display = "none";
+    //     } else {
+    //         // $('#foo').css('display', "none");
+    //       this.dropdownContent.style.display = "block";
+    //     }
+    //   });
+    // }
   }
 
-   openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-}
-
-/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
- closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-}
+ 
 
   ngOnInit() {
-    $(document).ready(() => {
-      const trees: any = $('[data-widget="tree"]');
-      trees.tree();
-    });
+    
    AOS.init({
 
    });
@@ -156,6 +173,11 @@ export class HeaderComponent implements OnInit {
     }
 
   }
+
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event) {
+      window.sessionStorage.clear();
+  }
   // remove(id, index) {
   //   this.userService.deleteUser(id).subscribe(() => console.log("user deleted"));
   //       var b = JSON.parse(localStorage.getItem('cartcount'));
@@ -172,8 +194,16 @@ export class HeaderComponent implements OnInit {
 
 
   home() {
-    this.router.navigate(['']);
+    this.router.navigate(['/home']);
+    this.ngOnInit()
     this.refresh();
+  }
+  
+  cart(){
+    let saro = new CartComponent(this.toastr, this.userService, this.http, this.router);
+
+    saro.ngOnInit();
+    this.router.navigate(['/cart'])
   }
 
   account() {
@@ -205,11 +235,13 @@ export class HeaderComponent implements OnInit {
      .subscribe((res:Response) => {
        this.prodObj = res;
        this.prodCategory = this.prodObj.Response;
+  
         this.api = true;
  
      }); 
    }
    Logout(){
+     
     localStorage.removeItem('currentUser');
     localStorage.removeItem('session');
     localStorage.removeItem('cartcount');
@@ -218,6 +250,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('cartloaditem');
     localStorage.removeItem('cartquantupdate');
     this.router.navigate(['/login']);
+
   }
   
 

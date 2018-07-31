@@ -50,10 +50,15 @@ import { OrderinfoComponent } from './orderinfo/orderinfo.component';
 import { CombosComponent } from './combos/combos.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { SelectModule } from 'ng-select';
+import { NgSlimScrollModule, SLIMSCROLL_DEFAULTS } from 'ngx-slimscroll';
+//import { MyDropdownFieldComponent } from './controls/my-dropdown-field.component';
+import { DawaAutocompleteModule } from 'ngx-dawa-autocomplete';
 
 @NgModule({
   declarations: [
     AppComponent,
+    //MyDropdownFieldComponent,
     HomeComponent,
     HeaderComponent,
     VegetablesComponent,
@@ -90,7 +95,10 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
   ],
   imports: [
     BrowserModule,
+    SelectModule,
+    NgSlimScrollModule,
     TooltipModule.forRoot(),
+    DawaAutocompleteModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
@@ -116,7 +124,12 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     BsDatepickerModule.forRoot(),
     AngularFontAwesomeModule
   ],
-  providers: [DataService, AuthGuard, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [DataService, AuthGuard, {provide: LocationStrategy, useClass: HashLocationStrategy}, {
+    provide: SLIMSCROLL_DEFAULTS,
+    useValue: {
+      alwaysVisible : false
+    }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

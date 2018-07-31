@@ -15,3 +15,11 @@
         width:10%;
     }
 }
+
+input:focus{
+    background-color: #fbfbfb;
+}
+
+select:focus{
+    background-color: #fbfbfb;
+}

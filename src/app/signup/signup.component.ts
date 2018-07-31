@@ -45,9 +45,9 @@ export class SignupComponent implements OnInit {
           GoogleId:null,
           FacebookId:null,
           Address:'',
-          ZoneId:'',
-          BranchId:'',
-          CityId:''       
+          ZoneId:0,
+          BranchId:0,
+          CityId:0       
          };
         
     this.authform = this.formbuilder.group({
@@ -118,7 +118,10 @@ export class SignupComponent implements OnInit {
 
 
   registerUser(){
-  
+    
+    if(this.register.UserName==''){
+      this.register.UserName = null;
+    }
   
     if(this.register.UserPassword==''){
       this.toastr.error("Password is mandatory")
@@ -132,15 +135,15 @@ export class SignupComponent implements OnInit {
     if(this.register.MobileNo==''){
       this.toastr.error("Mobile number is mandatory")
     }
-    if(this.register.ZoneName==''){
-      this.toastr.error("Zone Name is mandatory")
-    }
-    if(this.register.BranchName==''){
-      this.toastr.error("Branch Name is mandatory")
-    }
-    if(this.register.CityName==''){
-      this.toastr.error("City Name is mandatory")
-    }
+    // if(this.register.ZoneName==''){
+    //   this.toastr.error("Zone Name is mandatory")
+    // }
+    // if(this.register.BranchName==''){
+    //   this.toastr.error("Branch Name is mandatory")
+    // }
+    // if(this.register.CityName==''){
+    //   this.toastr.error("City Name is mandatory")
+    // }
     if(this.register.Address==''){
       this.toastr.error("Addrress is mandatory")
     }
@@ -159,7 +162,7 @@ export class SignupComponent implements OnInit {
          }
           if(obj.Status==true){
             this.loading = false;
-           this.toastr.success('User '+ this.register.UserName +  'has been created')
+           this.toastr.success('User '+ this.register.FullName +  ' has been created')
            this.router.navigate(['/login']);
           }
         },

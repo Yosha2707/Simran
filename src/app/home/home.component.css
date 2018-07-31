@@ -4,7 +4,7 @@ body, html {
 
 
 .main-slide{
-    margin-top:79px;
+    margin-top:0px;
 }
 
 
@@ -19,7 +19,7 @@ body, html {
 
 @media screen and (max-width:650px){
     .main-slide{
-        margin-top:29%;
+        margin-top:-5%;
     }
 }
 

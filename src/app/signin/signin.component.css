@@ -103,6 +103,14 @@ img {
 }
 .col-md-6{
   text-align: center;
+  
+}
+
+.our-space{
+  margin-top: -5%;
+}
+
+.container{
   margin-top: 5%;
 }
 .col-xs-12{

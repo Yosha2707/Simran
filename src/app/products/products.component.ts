@@ -45,6 +45,10 @@ import {
   distinctUntilChanged,
   map
 } from 'rxjs/operators';
+import { resetFakeAsyncZone } from '@angular/core/testing';
+import {IOption} from 'ng-select';
+import * as AOS from 'aos';
+import { DawaAutocompleteItem } from 'ngx-dawa-autocomplete';
 
 @Component({
   selector: 'app-products',
@@ -54,6 +58,8 @@ import {
 })
 export class ProductsComponent implements OnInit {
   public loading = false;
+  notfound=true;
+  name;
   preview: any = [{
     "Id": 0,
     "ProductCategoryId": 0,
@@ -94,7 +100,9 @@ export class ProductsComponent implements OnInit {
     "ModifiedBy": 0
   }];
   DataArray: any = [];
+  myOptions: Array<IOption>;
   array: any[];
+  idd;
   arrayWishlist: any = [];
   arraywish = [];
   fruitObj: any;
@@ -106,6 +114,9 @@ export class ProductsComponent implements OnInit {
   pageCount = null;
   count = 1;
   Price;
+  prodcat;
+  prodObj;
+  prodCategory
   public cartloadData;
   repeatCart = false;
   repeatWish = false;
@@ -114,19 +125,38 @@ export class ProductsComponent implements OnInit {
   x = [];
   p = [];
   q = [];
+  length;
+  read = false;
   imgPreview: any;
   pagecontent;
   searchword: any = [];
   searchKey: any;
   public model: any;
   prevfinalprice;
-//   searchh = (text$: Observable < string > ) =>
-//     text$.pipe(
-//       debounceTime(200),
-//       distinctUntilChanged(),
-//       map(term => term.length < 2 ? [] :
-//         this.searchword.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-//     );
+  showModal = false;
+  addCartValid = false;
+  noproduct=false;
+  Minimum;
+  t = null;
+  l;
+
+  // public items: DawaAutocompleteItem[] = [];
+  //   public highlightedIndex: number = 0;
+  //   public selectedItem: DawaAutocompleteItem;
+
+  //   public onItems(items) {
+  //       this.items = items;
+  //   }
+
+  //   public onItemHighlighted(index) {
+  //       this.highlightedIndex = index;
+  //   }
+
+  //   public onItemSelected(item) {
+  //       this.items = [];
+  //       this.highlightedIndex = 0;
+  //       this.selectedItem = item;
+  //   }
   constructor(private toastr: ToastrService, public route: ActivatedRoute, public userService: DataService, private http: Http, private router: Router) {
     this.cartCoount = localStorage.getItem('cartcount');
     this.cartloadData = localStorage.getItem('session');
@@ -134,28 +164,50 @@ export class ProductsComponent implements OnInit {
       this.value = this.value.replace(/[^0-9]/g, '');
     });
   }
+  
 
   ngOnInit() {
+    AOS.init({
+
+    });
     this.route.params.subscribe(params => {
       this.pagecontent = +params['id'];
       // alert(this.pagecontent);
-      if (this.pagecontent == 4) {
-        this.router.navigate(['/Combos'])
-      } else {
+     // if (this.pagecontent == 4) {
+     //   this.router.navigate(['/Combos'])
+     // } else {
         this.search(null, this.pagecontent);
-      }
+        this.searchProductCat();
+   //   }
 
     });
 
   }
 
 
+  readmore(){
+   
+this.read = true;
+this.length = 0;  
+}
+readless(){
+  this.read = false;
+  this.length = 35;
+}
+
   productPreview(data) {
+    this.showModal = true;
     this.userService.productPrev(data).subscribe(
       (res:Response) => {
      this.veg = res;
      this.preview = this.veg.Response;
+     this.Minimum = this.preview.MinQuantity;
+     
      this.imgPreview = this.preview.objAttachmentsViewModel.AbsoluteURL;
+     if(this.preview.Description!=null){
+      this.length = this.preview.Description.replace(/\s/g, "").length;
+     }
+    
     });
    
    }
@@ -180,6 +232,7 @@ export class ProductsComponent implements OnInit {
 
 
   cartdata(data, dataQty) {
+    this.reset();
     localStorage.setItem('repeat', JSON.parse("false"))
     this.userService.cartData(data, dataQty);
     this.second();
@@ -211,7 +264,9 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  whishlist(data, qty) {
+  whishlist(event, data, index,qty) {
+  
+    this.loading = true;
     var l = JSON.parse(localStorage.getItem('currentUser'));
     if (l != null) {
       var t = l.Response.Id;
@@ -237,38 +292,44 @@ export class ProductsComponent implements OnInit {
 
           this.x.forEach((item, productIndex) => {
             if (item.ProductId == data.Id) {
-              this.repeatWish = true;
-              this.toastr.info("Product Already In Wishlist!")
+              this.array.forEach((element,dex) => {
+                if(element.Id==data.Id){
+                  this.array[dex].repeatWish = true;
+                }
+              });
             }
           });
-          if (this.repeatWish == false) {
-            let obj = [];
-            var o = JSON.parse(localStorage.getItem('wishonetime'));
-            obj.push(o);
-            Array.prototype.push.apply(this.x, obj);
-            const url = `${"http://api.simranfresh.com/api/wishcart"}`;
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            this.http.put(url, this.x, {
-                headers: headers
-              })
-              .map(res => res.json())
-              .subscribe(
-                data => {
-                  if (data.Status == true) {
-                    this.toastr.success("Added to wishlist successfully!")
-                    localStorage.removeItem('wishonetime');
-                  }
-                },
+        
+      let obj = [];
+      var o = JSON.parse(localStorage.getItem('wishonetime'));
+      obj.push(o);
+      Array.prototype.push.apply(this.x, obj);
+      const url = `${"http://api.simranfresh.com/api/wishcart"}`;
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      this.http.put(url, this.x, {
+          headers: headers
+        })
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            if (data.Status == true) {
+              this.ngOnInit();
+              this.loading  =false
+              this.toastr.success("Added to wishlist successfully!")
+              localStorage.removeItem('wishonetime');
+            }
+          },
 
-                error => {
-                  this.userService.error(error);
-                  console.log(error);
-                });
-          }
+          error => {
+            this.userService.error(error);
+            console.log(error);
+          });
+          
         });
 
     } else {
+      this.loading = false;
       this.toastr.info("Please login to add in wishlist!")
     }
 
@@ -279,9 +340,17 @@ export class ProductsComponent implements OnInit {
     window.location.reload();
   }
 
+
+
 	search(data, o) {
+     this.l = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.l != null) {
+      this.t = this.l.Response.Id;
+    }
+    let op=[];
+   // alert(o)
 		this.searchKey = data;
-		this.loading = true;
+	
 		// alert(this.pageCount);
 		if (data != null) {
 			this.pageCount = null;
@@ -310,27 +379,79 @@ export class ProductsComponent implements OnInit {
 		});
 		let options = new RequestOptions({
 			headers: headers
-		});
+    });
+    this.loading = true;
 		this.http.post("http://api.simranfresh.com/api/productprices", this.fruitObj, options)
 		.map(res => res.json())
 		.subscribe((res: Response) => {
-			this.loading = false;
-			this.DataArray = res;
-			this.array = this.DataArray.Response
-      var localcart = JSON.parse(localStorage.getItem('cartsession'));
-      console.log(this.array);
-      console.log(localcart);
-      // localcart.forEach(element => {
+    console.log(res);
+    
+      this.DataArray = res;
+      if(this.DataArray.Status==true){
+        this.loading = false;
+      }else{
+        this.loading = false;
+        this.toastr.error(this.DataArray.objErrorInfo.ErrorMessage)
+      }
+      this.array = this.DataArray.Response
+if(this.l!==null){
+    this.loading =false;
+  this.http.get('http://api.simranfresh.com/api/wishcart/' + this.t + '?type=' + "wish").subscribe((res:Response)=>{
+    let l = res.json();
+    let x = l["Response"]
+
+if(data==null){
+this.array.forEach((element, index) => {
+var ook = element.Name;
+var obj = {label:ook, value:''}
+//  console.log(ook)
+x.forEach(item => {
+  if(element.Id==item.ProductId){
+    this.array[index].repeatWish = true;
+   }
+});
+op.push(obj);
+});
+Promise.all(op)
+.then(() => {
+this.myOptions = op;
+// this.myOptions = [{label:'belgium', value:''}];
+   var localcart = JSON.parse(localStorage.getItem('cartsession'));
+   if(this.array.length>0){
+     this.noproduct = false;
+   }else{
+       if(o==4){
+         this.noproduct=true;
+       var obj={
+         "ProductCategoryName":"Combos"
+       }
+       this.array.push(obj)
+       }else{
+         this.search(null, this.pagecontent)
+       }
+   }
+
+})
+this.loading = false;
+}
+    
+
+        this.array.forEach((item, productIndex) => {
+          var fi = item.MinQuantity * item.Price
+          this.array[productIndex].finalPrice = fi;
+          var product = item.Name;
+          this.searchword.push(product);
+         
+        });
         
-      // });
-			this.array.forEach((item, productIndex) => {
-				var fi = item.MinQuantity * item.Price
-				this.array[productIndex].finalPrice = fi;
-				var product = item.Name;
-				this.searchword.push(product);
-			});
-		})
-	}
+  })
+}
+    
+    })
+   
+  }
+  
+  
 
   next() {
     this.count = this.count + 1;
@@ -358,10 +479,22 @@ export class ProductsComponent implements OnInit {
   }
 
   calculateProductPrice(quant, price, index) {
-    if (quant > 99) {
-      this.array[index].MinQuantity = 0;
-      this.toastr.error("Maximum Quantity 99!")
-    } else {
+    if(this.preview.MinQuantity!=null){
+      if(quant< this.preview.MinQuantity){
+        this.preview.MinQuantity = '';
+      }
+    }else if(this.preview.MinQuantity==null){
+    if(quant<1){
+      this.preview.MinQuantity = 1;
+    }
+    }else if(quant.toString().length>3){
+      this.preview.MinQuantity='';
+    }
+    // if (quant > 99) {
+    //   this.array[index].MinQuantity = 0;
+    //   this.toastr.error("Maximum Quantity 99!")
+    // } 
+    else {
       var final = (+quant) * price || 0;
       this.prevfinalprice = final;
       this.array[index].finalPrice = final;
@@ -372,15 +505,71 @@ export class ProductsComponent implements OnInit {
 
 
   calculateProductPricePrev(quant, price, index) {
-    if (quant > 99) {
-   //   this.array[index].MinQuantity = 0;
-      this.toastr.error("Maximum Quantity 99 Kg!")
-    } else {
-      var final = (+quant) * price || 0;
+//var a = quant.toString().length
+if(quant!=null){
+  var t = +quant.toString().replace(/^[^\.]+/,'0');
+}
+var r = +quant - (+t);
+var tt = t.toString().length - 1;
+var rr  = r.toString().length;
+// alert(t)
+// alert(tt)
+// alert(r)
+// alert(rr);
+    if(this.Minimum!=null){
+        if(quant< this.Minimum){
+          this.preview.MinQuantity = 0;
+        }else if(rr>2){
+          this.preview.MinQuantity = 0;
+        }else if(tt>4){
+          this.preview.MinQuantity = 0;
+        }
+        var f = (+this.preview.MinQuantity) * price || 0;
+        var final = Number(f).toFixed(3);
       this.prevfinalprice = final;
-    //  this.array[index].finalPrice = final;
-    
+    }else if(this.Minimum==null){
+        if(quant<1){
+          this.preview.MinQuantity = 0;
+        }else if(rr>2){
+          this.preview.MinQuantity = 0;
+        }else if(tt>4){
+          this.preview.MinQuantity = 0;
+        }
+        var f = (+this.preview.MinQuantity) * price || 0;
+        var final = Number(f).toFixed(3);
+      this.prevfinalprice = final;
     }
 
   }
+  reset(){
+    this.prevfinalprice = 0
+    this.showModal = false;
+  }
+
+  searchProductCat(){
+    this.prodcat = {
+     "Id":null,
+     "Name":null,
+     "ImageUpload":null,
+     "HSNCode":null,
+     "DisplaySequence":null,
+     "IsActive":"true",
+     "Description":null,
+     "PageCount":null,
+     "PageSize":null,
+     "TopSearch":null
+    }
+    let headers = new Headers({ "content-type": "application/json", });
+    let options = new RequestOptions({ headers: headers });
+    this.http.post("http://api.simranfresh.com/api/productcategory", this.prodcat, options)
+    .map(res => res.json())
+    .subscribe((res:Response) => {
+      this.prodObj = res;
+      this.prodCategory = this.prodObj.Response;
+      
+
+    }); 
+  }
 }
+
+

@@ -1,114 +1,114 @@
-<nav class="navbar navbar-fixed-top" role="navigation">
-    <div class="row navbar-inner">
-      <div class="col-md-4 col-sm-12 col-xs-12 main-logo">
-        <img alt="" src="assets/img/logo/simran.png" (click)="home()" class="logo" />
-      </div>
-      <div class="col-md-4 col-sm-12 col-xs-12 tom">
-        <a class="order" style="cursor: pointer;">Order on <i class="fa fa-phone call"></i> or <i class="fa fa-whatsapp whatsapp"></i> +91 8717928888, +91 8717918888</a>
-      </div>
-      <div class="col-md-4 col-sm-12 col-xs-12 responsivecolsm4">
-        <div class="row simhide">
-          <p class="mobilesimran">
-              <img alt="" src="assets/img/logo/simran.png" (click)="home()" class="mobilelogo"/>
-            SIMRAN FRESH
-          </p>
-        </div>
-        <ul class="nav navbar-nav navbar-right subnavright li-mlr-5">
-          <li class="welcome" *ngIf="yes==true;">
-            <a class="subheadcontent hello">
-              Hello {{hello}}
-            </a>
-          </li>
-          <li class="subheadernew">
-            <a class="subheadcontent" (click)="account()" style="cursor: pointer;">
-              My Account
-            </a>
-          </li>
-          <li class="" *ngIf="currentuser==null">
-            <a class="subheadcontent" style="cursor: pointer;" routerLink="/login">
-              Login
-            </a>
-          </li>
-          <li class="" *ngIf="currentuser!=null">
-            <a class="subheadcontent" style="cursor: pointer;" (click)="Logout()">
-              Logout
-            </a>
-          </li>
-          <li>
-            <a class="glyphicon glyphicon-shopping-cart subheadcontent" routerLink="/cart">
-              <span class="cart-counter">{{parentCount}}</span>
-            </a>
-          </li>
-          <li>
-            <a (click)="openNav()" class="responsive-toggle fa fa-bars">
-  
-            </a>
-          </li>
-        </ul>
-      </div>
+<nav class="navbar navbar-default">
+  <div>
+    
+    <div class="col-md-4">
+      <img alt="" src="assets/img/logo/simran.png" (click)="home()" class="img-logo" />
     </div>
-  </nav>
-  
-  <!-- Main Header Start -->
-  <div class="row">
-  <header *ngIf="api==true" class="main-header animated" id="main" data-aos="fade-down"
-  data-aos-easing="linear"
-  data-aos-duration="1500">
-    <div class="container-fluid rel-div">
-      <div class="col-md-2 col-sm-2 col-xs-2">
-         <div class="">
-            <!-- <div class="vo">SIMRAN FRESH</div> -->
-        </div> 
-      </div>
-      <div class="col-md-7 col-sm-7 col-xs-7 responsive-menu">
-        <nav class="navbar-right" id="">
-          <ul class="primary-navbar responsiveprimary-navbar">
-            <li>
-              <a (click)="home()" style="cursor: pointer;">Home</a>
-            </li>
-            <li class="responsive dropdown nav-trigger" *ngFor="let data of prodCategory ; let i=index">
-              <a class="dropdown-toggle menu-toggle dropdown-btn" (click)="drop()" role="button" [routerLink]="['/products', data.Id]" style="color: white;">{{data.Name}} <i class="fa fa-caret-down"></i></a>
-              <div class="dropdown-container">
-                <a href="#">Link 1</a><br>
-                <a href="#">Link 2</a><br>
-                <a href="#">Link 3</a>
-              </div>
-              <ul class="dropdown-menu">    
-                  <div class="menu-block">
-                      <div class="menu-caption">
-                        <ul class="sub-list">
-                          <li>
-                            <a href="#">Sample 1</a>
-                          </li><hr>
-                        <li>
+    <div class="col-md-4 col-sm-12 col-xs-12 orderstatement">
+      <a class="order" style="cursor: pointer;">Order on <i class="fa fa-phone call"></i> or <i class="fa fa-whatsapp whatsapp"></i> +91 8717928888, +91 8717918888</a>
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="row simhide">
+            <p class="mobilesimran">
+                <img alt="" src="assets/img/logo/simran.png" (click)="home()" class="mobilelogo"/>
+              SIMRAN FRESH
+            </p>
+          </div>
+          <ul class="nav subnavright">
+              <li class="welcome" *ngIf="yes==true;">
+                <a class="subheadcontent hello">
+                  Hello {{hello}}
+                </a>
+              </li>
+              <li class="subheadernew">
+                <a class="subheadcontent" (click)="account()" style="cursor: pointer;">
+                  My Account
+                </a>
+              </li>
+              <li class="" *ngIf="currentuser==null">
+                <a class="subheadcontent" style="cursor: pointer;" routerLink="/login">
+                  Login
+                </a>
+              </li>
+              <li class="" *ngIf="currentuser!=null">
+                <a class="subheadcontent" style="cursor: pointer;" (click)="Logout()">
+                  Logout
+                </a>
+              </li>
+              <li>
+                <a class="glyphicon glyphicon-shopping-cart subheadcontent" (click)="cart()"><span class="cart-counter">{{parentCount}}</span></a>
+              </li>
+              <li>
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle x collapsed" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                  </button>
+                </div>
+              </li>
+            </ul>
+    </div>
+   
+  </div>
+</nav>
+
+<!-- data-aos="fade-down"
+    data-aos-easing="linear"
+    data-aos-duration="1500" -->
+    
+    <div class="collapse navbar-collapse" id="myNavbar" *ngIf="api==true" >
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <ul class="primary-navbar responsiveprimary-navbar">
+        <li data-toggle="collapse" data-target="#navbar-collapse.in">
+          <a (click)="home()" style="cursor: pointer;">Home</a>
+        </li>
+        
+        <li  data-toggle="collapse" data-target="#navbar-collapse.in" class="responsive dropdown nav-trigger" *ngFor="let data of prodCategory ; let i=index">
+          <a class="dropdown-toggle menu-toggle dropdown-btn" (click)="drop($event)" [routerLink]="['/products', data.Id]" role="button" style="color: white;"><i id="caret" class="fa fa-caret-down caret-icon"></i> {{data.Name}} 
+            </a>
+          <div class="dropdown-container" id="foo">
+            <a class="subdrop">Link 1</a><br>
+            <a class="subdrop">Link 2</a><br>
+            <a class="subdrop">Link 3</a>
+          </div>
+          <!-- <ul class="dropdown-menu">    
+              <div class="menu-block">
+                  <div class="menu-caption">
+                    <ul class="sub-list"> -->
+                      <!-- <li>
+                        <a href="#">Sample 1</a>
+                      </li><hr>
+                    <li>
+                      <a>
+                        Sample 2
+                      </a>
+                    </li><hr>
+                    <li>
+                        <a>
+                          Sample 3
+                        </a>
+                      </li><hr>
+                      <li>
                           <a>
-                            Sample 2
+                            Sample 4
                           </a>
                         </li><hr>
                         <li>
                             <a>
-                              Sample 3
+                              Sample 5
                             </a>
-                          </li><hr>
-                          <li>
-                              <a>
-                                Sample 4
-                              </a>
-                            </li><hr>
-                            <li>
-                                <a>
-                                  Sample 5
-                                </a>
-                              </li><hr>
-                              </ul>
-                      </div>
-                    </div>
-              </ul>
-          </li>
-          </ul>
-        </nav>
-      </div>
+                          </li><hr> -->
+                          <!-- </ul>
+                  </div>
+                </div>
+          </ul> -->
+      </li>
+      </ul>
     </div>
-  </header>
-  </div>
-  <!-- / Main Header Ends -->
+    <div class="col-md-2"></div>
+    </div>
+  
+
+

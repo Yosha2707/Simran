@@ -78,6 +78,8 @@
      margin-left: 10%;
      transform: translate3d(-50%, -50%, 0);
  }
+
+
  
  .loader .dot {
      width: 24px;
@@ -347,6 +349,10 @@
  .sec-space {
      padding-bottom: 59px;
      padding-top: 0;
+ }
+
+ .our-space{
+     height: 236px;
  }
  
  .sec-space-bottom {
@@ -816,7 +822,7 @@
  .form-control, .input-group-addon, .bootstrap-select .btn {
      background-color: #fbfbfb;
      border-color: #e7e7e6;
-     border-radius: 25px;
+     border-radius: 5px;
      box-shadow: none;
      font-size: 13px;
      height: 45px;
@@ -2010,7 +2016,9 @@
  
      .responsive-toggle {
          display: none !important;
-     }
+     } .head{
+        margin-top: -1%;
+    }
  
      /*-- Header --*/
      .white-bg .primary-navbar {
@@ -2090,8 +2098,10 @@
  
      .main-header {
          padding: 20px 10px;
-         /* position: static; */
-     }
+         position: static;
+     } .head{
+        margin-top: 6%;
+    }
  
      .cart-megamenu {
          float: none;
@@ -2102,6 +2112,8 @@
      .cart-megamenu .responsive-toggle {
          margin: 6px 25px 0 0;
          float: right;
+     }.block-inline{
+         margin-left: 5%;
      }
  }
  
@@ -2432,7 +2444,7 @@
     .sec-space {
         padding-bottom: 3%;
         padding-top: 0;
-        margin-top:23%
+        margin-top:-6%
     }
 }
 
@@ -2588,7 +2600,7 @@
  .deals .right-bg-img {
      position: absolute;
      right: 0;
-     margin-top: 9%;
+     margin-top: 2%;
  }
  
  .deals .left-bg-img {
@@ -2838,8 +2850,35 @@
  
  /*-- ./Style-2 --*/
  
+ .swal2-popup #swal2-content {
+    text-align: center;
+    font-size: 14px;
+}
+.swal2-popup .swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: green;
+    color: #fff;
+    font-size: 11px;
+}
+
+.swal2-popup .swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #aaa;
+    color: #fff;
+    font-size: 11px;
+}
+
+
  .prod-banner.green-banner {
      background-color: #d7edcd;
+ }
+
+ .greenbtn{
+    background-color: green; color:white;
  }
  
  .green-banner .banner-box .btn {
@@ -3471,6 +3510,66 @@
      margin-top: 15px;
      text-align: right;
  }
+
+ #info
+{
+	font-size: 18px;
+	color: #555;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+a{
+	color: #074E8C;
+}
+
+.scrollbar
+{
+	margin-left: 30px;
+	float: left;
+	height: 300px;
+	width: 65px;
+	background: #F5F5F5;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+
+#wrapper
+{
+	text-align: center;
+	width: 500px;
+	margin: auto;
+}
+
+/*
+ *  STYLE 1
+ */
+
+#style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
  
  @media (min-width: 1200px) {
      .product-modal {
@@ -3996,7 +4095,9 @@
      margin-right: 10px;
      vertical-align: text-bottom;
  }
- 
+ a{
+     color: black;
+ }
  .registed-form .fpw {
      float: left;
      margin: 10px auto auto;

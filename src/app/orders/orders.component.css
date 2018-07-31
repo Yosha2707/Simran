@@ -32,6 +32,17 @@ section-title{
 #a{
     cursor: pointer;
 }
+#a:hover{
+	color: green;
+}
+.goback{
+	background-color: #cbd26d;
+    border-radius: 7px;
+    font-size: 14px;
+    padding: 5px;
+    width: 20%;
+    margin-bottom: 10%;
+}
 
 body {
 	background: #eee;
@@ -143,6 +154,12 @@ a:hover {
 /* #cart {
 	width: 100%;
 } */
+
+@media screen and (max-width:768px){
+	.goback{
+		margin-left:4%;
+	}
+}
 
 #cart h1 {
 	font-weight: 300;
@@ -417,24 +434,7 @@ span > .button {
 	float: right;
 }
 
-.btn {
-	background: #53b5aa;
-	margin-top: 4.5%;
-	cursor: pointer;
-	display: block;
-	color: #fff;
-	font-size: 20px;
-	font-weight: 300;
-	
-	
-	text-align: center;
 
-	-webkit-transition: all .2s linear;
-	-moz-transition: all .2s linear;
-	-ms-transition: all .2s linear;
-	-o-transition: all .2s linear;
-	transition: all .2s linear;
-}
 
 .subtotal, .shipping, .total, .taxes{
 	padding-bottom: 4%
@@ -449,6 +449,13 @@ span > .button {
 border-bottom: 1px solid lightgray;
     transition: all 0.4s ease-in-out 0s;
     -webkit-transition: all 0.4s ease-in-out 0s;
+}
+
+.grenbtn{
+	margin-bottom: 10%;
+	color: white;
+	margin-bottom: 10%;
+    
 }
 
 

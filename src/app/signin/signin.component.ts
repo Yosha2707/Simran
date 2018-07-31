@@ -46,13 +46,13 @@ constructor(ngZone: NgZone, private toastr: ToastrService, private http: Http, p
     //     'theme': '',
        
     //   });
-
     var u = JSON.parse(localStorage.getItem('remember'));
     this.UserName = u.UserName;
     this.Password = u.Password;
 
   
   }
+  
 
   // onSignIn(googleUser) {
   //   alert("Google signin");
@@ -166,17 +166,18 @@ toggleEditable(event) {
                    
                    
                    if(data.Status==true){
+                    this.loading = false;
                     localStorage.setItem('currentUser', JSON.stringify(data));
                     this.userService.syncCart().then(
                       res => { // Success
-                        this.loading = false;
+                        
                       
                         var use = data.Response.UserName
                         console.log("PPPPPPP")
                         console.log(data)
                        this.toastr.success("Welcome, " + use+" !")
                        let previous = this.userService.getPreviousUrl();
-                      // alert(previous);
+                       
                        if(previous=="/"){
                         this.home();
                        }
@@ -184,6 +185,9 @@ toggleEditable(event) {
                         this.home();
                        }
                        else if(previous=="/login"){
+                        this.home();
+                       }
+                       else if(previous=="/success"){
                         this.home();
                        }else{
                          this.router.navigate([previous]);

@@ -33,6 +33,8 @@ jerry:any = [];
 jerryy:any = [];
 currentUrl;
 previousUrl;
+noddy:any = [];
+bob:any = [];
   constructor(private http: Http, public AuthGuard: AuthGuard,private toastr: ToastrService, public router : Router) {
     this.cartCoount = localStorage.getItem('cartcount');
     this.currentUrl = this.router.url;
@@ -104,6 +106,7 @@ getEncRequest(){
   }
 
 cartData(data, dataQty){
+  //alert(dataQty)
   var repeat=false;
   let array = [];
   var beforeadd = JSON.parse(localStorage.getItem('cartsession'));
@@ -111,59 +114,94 @@ cartData(data, dataQty){
   if(user==null){
      this.userid = 0;
    if(beforeadd!=null){
-    beforeadd.forEach(element => {
+    beforeadd.forEach((element, index) => {
       if(element.ProductId==data.Id){
-        this.toastr.info("Product Already in cart!");
-        localStorage.setItem('repeat', JSON.parse("true"))
-        repeat=true;
+        // this.toastr.info("Product Already in cart!");
+        var yo = element.Quantity;
+        var po = dataQty;
+        var to = +yo + +po;
+        if(to>99){
+          dataQty = po;
+        }else{
+          dataQty = to;
+        }
+        
+        beforeadd.splice(index,1);
+       // console.log(beforeadd);
+        localStorage.setItem('cartsession', JSON.stringify(beforeadd));
+        // localStorage.setItem('repeat', JSON.parse("true"))
+        localStorage.setItem('repeat', JSON.parse("false"))
+        repeat=false;
       }
     });
    }
+  
+
    if(beforeadd==null){
+     
      this.toastr.info("You need to login to place order!")
    }
   }else{
     this.userid = user.Response.Id;
-    var latest = JSON.parse(localStorage.getItem('cartloaditem'))
- if(latest!=null){
-  latest.forEach(element => {
-    if(element.ProductId==data.Id){
-      this.toastr.info("Product Already in cart!");
-      localStorage.setItem('repeat', JSON.parse("true"))
-      repeat=true;
-    }
-  });
- }
+//     this.http.get('http://api.simranfresh.com/api/wishcart/'+this.userid+'?type=' + "cart").subscribe((res:Response)=>{
+//       this.bob = res.json();
+//       this.noddy = this.bob.Response;
+//       localStorage.setItem('cartloaditem', JSON.stringify(this.noddy));
+//     })
+//     var latest = JSON.parse(localStorage.getItem('cartloaditem'))
+//     console.log("!!!!!!!!!!!!")
+//     console.log(latest)
+//  if(latest!=null){
+//   latest.forEach((element, index) => {
+//     if(element.ProductId==data.Id){
+//       var yoo = element.Quantity;
+//       var poo = dataQty;
+//       var too = +yoo + +poo;
+//       dataQty = too;
+//       console.log(latest);
+//       latest.splice(index,1)
+//      console.log(latest);
+//       localStorage.setItem('cartsession', JSON.stringify(latest));
+//       // localStorage.setItem('repeat', JSON.parse("true"))
+//       localStorage.setItem('repeat', JSON.parse("false"))
+//       repeat=false;
+//     }
+//   });
+//  }
   }
   if(repeat==false){
+    
     var dat = {
       "Id":0,
       "UserId":this.userid,
       "WishCartType": "cart",
       "ProductId":data.ProductId || data.Id,
-      "Quantity": dataQty,
+      "Quantity": parseFloat(dataQty) || dataQty,
       "CreatedDate":data.CreatedDate  ,
       "ProductName": data.Name,
       "Description": data.Description,
       "HSNCode": data.HSNCode,
-      "MinQuantity": data.MinQuantity,
+      "MinQuantity": null,
       "Price": data.Price,
       "UnitName": data.UoMName,
       "objAttachmentsViewModel":data.objAttachmentsViewModel,
       "incart":true
     }
-  
+ // alert(JSON.stringify(dat))
     if(beforeadd==null){
       let setArray = [];
+      console.log("131313");
+      console.log(setArray);
       setArray.push(dat);
       localStorage.setItem('cartsession', JSON.stringify(setArray));
     }
     else{
       array.push(dat);
       Array.prototype.push.apply(array,beforeadd);
+      console.log("14141414");
+      console.log(array);
       localStorage.setItem('cartsession', JSON.stringify(array));
       var localcart = JSON.parse(localStorage.getItem('cartsession'));
-      alert(localcart);
     }
     this.toastr.success("Added to Cart Successfully!")
     this.syncCart();
@@ -175,6 +213,7 @@ syncCart(){
   let promise = new Promise((resolve, reject) => {
     var user = JSON.parse(localStorage.getItem('currentUser'));
     var results = JSON.parse(localStorage.getItem('cartsession'));
+  
     if(user!=null){
       if(user.Status==true){
         if(results!=null){
@@ -190,28 +229,42 @@ syncCart(){
             this.updatedArray.forEach(element => {
               results.forEach((item, index) => {
                 if(element.ProductId==item.ProductId){
+                  var n = element.Quantity;
+                  var m = item.Quantity;
+                  var nm = +n + +m;
+                 // alert(m);
+                  if(nm > 99){
+                    element.Quantity = n;
+                  }else{
+                    element.Quantity = nm;
+                  }
                   results.splice(index,1)
                 }
               });
             });
           }
-          
+          if(results!=null && this.updatedArray!=null){
             Array.prototype.push.apply(this.updatedArray,results);
+          }else{
+            this.updatedArray = results;
+          }
           const url = `${"http://api.simranfresh.com/api/wishcart"}`;
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
            var f = JSON.parse(localStorage.getItem('cartquantupdate'));
-          
            if(f==null){
             this.http.put(url, this.updatedArray , {headers:headers}).map(res => res.json()) .subscribe(
               data => {
                 this.http.get('http://api.simranfresh.com/api/wishcart/'+user.Response.Id+'?type=' + "cart")
                 .toPromise().then(
                   res =>{
+                   
                     this.tom = res.json();
                     this.jerry = this.tom.Response;
                     localStorage.setItem('cartloaditem', JSON.stringify(this.jerry));
                     var x = localStorage.getItem('cartloaditem');
+                    console.log(".!.!.!.!.!")
+                    console.log(JSON.parse(x))
                     localStorage.removeItem('cartsession');
                     resolve();
                   }
@@ -248,8 +301,7 @@ ordersuccess(){
   headers.append('Content-Type', 'application/json');
   this.http.put(url, empty , {headers:headers}).map(res => res.json()) .subscribe(
     data => {
-     console.log(data);
-     console.log(empty);
+    
 });
 }
 

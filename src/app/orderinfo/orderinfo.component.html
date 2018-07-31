@@ -8,7 +8,7 @@
     <div class="container rel-div">
       <div class="title-wrap row" style="margin-left:2%; margin-top: 9%;">
         <h2 class="section-title">
-          <strong>Ordered Items
+          <strong>Order Summary
             <img style="left: 160px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
         </h2>
        
@@ -20,38 +20,192 @@
   </section>
   <!-- Heading Ends -->
 
- <!-- Random Products Starts-->
-  <section class="">
-    <div class="container"> 
-        <!-- Random Products -->
-        <div class="row">
-            <div class="col-md-4 pt-50"  *ngFor="let data of info">
-                <div class=""> 
-                    <div class="item"> 
-                        <div class="random-prod"> 
-                            <div class="random-img"> 
-                                <img alt="" src="assets/img/extra/random-1.png" />
-                            </div>
-                            <div class="random-text"> 
-                                <h3 class="title-1 no-margin"> <a href="#"><strong>{{data.ProductName}} </strong> </a> </h3>
-                                <span class="divider"></span>
-                                <div class="price"> 
-                                    <strong class="clr-txt">{{data.Quantity}} {{data.UnitName}}</strong>
+<div class="container">
+	<div class="row">
+   <div class="col-md-3 col-xs-12 col-sm-12" style="margin-top: 12%; text-align: center;">
+        <button class="greenbtn bot" routerLink="/Orders"><i class="fa fa-arrow-left" style="font-size:12px;color:white"></i> Back</button>
+        <button class="greenbtn bot" (click)="print()"><i class="fa fa-print" style="font-size:12px;color:white"></i> Print</button>
+   </div>
+          <div class="col-sm-1 col-xs-1"></div>         
+        <div class="receipt-main col-xs-10 col-sm-10 col-md-8">
+            <div class="row">
+    			<div class="receipt-header">
+					
+					<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center;">
+						<div class="receipt-right">
+                            <img class="img-responsive" alt="iamgurdeeposahan" src="assets/img/logo/simran.png">
+                            <p>1-B, Vikas Rekha Complex,</p>
+                                <p>Tower Square, Khatiwala Tank</p>
+                                <p>Indore, Madhya Pradesh, 452012</p>
+                                <p>info@simranfresh.com</p>
+                                <p>(+91) 8717 928 888, (+91) 8717 918 888</p>
+						</div>
+					</div>
+				</div>
+            </div>
+			
+			<div class="row">
+				<div class="receipt-header receipt-header-mid">
+					<div class="col-xs-8 col-sm-8 col-md-8 text-left">
+						<div class="receipt-right">
+							<h5>{{cusName}} <small></small></h5>
+							<p><b>Mobile :</b> {{cusMobile}}</p>
+							<p><b>Email :</b> {{cusEmail}}</p>
+							<p><b>Address :</b>{{cusAddress}}</p>
+						</div>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4">
+						<div class="receipt-left">
+							<!-- <h1>Order Summary</h1> -->
+						</div>
+					</div>
+				</div>
+            </div>
+			
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of info">
+                            <td class="col-md-3">{{data.ProductName}}</td>
+                            <td class="col-md-3">{{data.Quantity}} {{data.UnitName}}</td>
+                            <td class="col-md-3">₹{{data.Price}}</td>
+                            <td class="col-md-3"><i class="fa fa-inr"></i> {{data.Amount}}</td>
+                        </tr>
+                     
+                     
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right"><h2><strong>Total: </strong></h2></td>
+                            <td class="text-left text-danger"><h2><strong><i class="fa fa-inr"></i>{{netAmount}}</strong></h2></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+			
+			<div class="row">
+				<div class="receipt-header receipt-header-mid receipt-footer">
+					<div class="col-xs-8 col-sm-8 col-md-8 text-left">
+						<div class="receipt-right">
+							<p><b>Order Date :</b> {{orderDate | date}}</p>
+						</div>
+					</div>
+
+				</div>
+            </div>
+            <div class="row">
+                <p class="foot">I/we hereby certify that food/foods mentioned in this invoice is/are warranted to be of the nature and quality which it/these purport to be.</p>
+                <hr>
+                <p class="foot">Thank You! We appreciate your valuable Feedback.</p>
+            </div>
+			
+        </div>   
+        <div class="col-sm-1 col-xs-1"></div>  
+    </div>
+</div>
+
+
+<!-- Print -->
+
+<div class="container">
+    <div class="row">
+            <div id="print-section" class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3 printbill">
+                    <div class="row">
+                        <div class="receipt-header">
+                            
+                            <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center;">
+                                <div class="receipt-right">
+                                    <img class="img-responsive" alt="iamgurdeeposahan" src="assets/img/logo/simran.png">
+                                    <p>1-B, Vikas Rekha Complex,</p>
+                                        <p>Tower Square, Khatiwala Tank</p>
+                                        <p>Indore, Madhya Pradesh, 452012</p>
+                                        <p>info@simranfresh.com</p>
+                                        <p>(+91) 8717 928 888, (+91) 8717 918 888</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-          <button class="btn">Cancel Order</button>
-        </div>
-
-
+                    
+                    <div class="row">
+                        <div class="receipt-header receipt-header-mid">
+                            <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                                <div class="receipt-right">
+                                    <h5>{{cusName}} <small></small></h5>
+                                    <p><b>Mobile :</b> {{cusMobile}}</p>
+                                    <p><b>Email :</b> {{cusEmail}}</p>
+                                    <p><b>Address :</b>{{cusAddress}}</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4">
+                                <div class="receipt-left">
+                                    <!-- <h1>Order Summary</h1> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <table width="100%" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="5" style="text-align: left;" align="left">Item</th>
+                                    <th colspan="2" style="text-align: right;" align="right">Quantity</th>
+                                    <th colspan="2" style="text-align: right;" align="right">Price</th>
+                                    <th colspan="2" style="text-align: right;" align="right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of info">
+                                    <td colspan="5" style="text-align: left;" align="left">{{data.ProductName}}</td>
+                                    <td colspan="2" style="text-align: right;" align="right">{{data.Quantity}} {{data.UnitName}}</td>
+                                    <td colspan="2" style="text-align: right;" align="right">₹{{data.Price}}</td>
+                                    <td colspan="2" style="text-align: right;" align="right"><i class="fa fa-inr"></i> {{data.Amount}}</td>
+                                </tr>
+                             
+                                <tr></tr>
+                             
+                                <tr>
+                                    
+                                    <td colspan="5" style="text-align: right;" align="right"><strong>Total: </strong></td>
+                                    <td colspan="6" style="text-align: right;" align="right"><strong><i class="fa fa-inr"></i>{{netAmount}}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="receipt-header receipt-header-mid receipt-footer">
+                            <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                                <div class="receipt-right">
+                                    <p><b>Order Date :</b> {{orderDate | date}}</p>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="foot">I/we hereby certify that food/foods mentioned in this invoice is/are warranted to be of the nature and quality which it/these purport to be.</p>
+                        <hr>
+                        <p class="foot">Thank You! We appreciate your valuable Feedback.</p>
+                    </div>
+                    
+                </div> 
     </div>
-</section>
-<!-- Random Products Ends -->
-
+</div>
 
 <app-footer></app-footer>
+
+
+
+
+
+
+

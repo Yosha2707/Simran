@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,11 @@ export class HomeComponent implements OnInit {
     this.cartCoount = localStorage.getItem('cartcount');
    }
 
+
   ngOnInit() {
+  
   }
+
+  
 
 }

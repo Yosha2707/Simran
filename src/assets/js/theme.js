@@ -17,8 +17,9 @@ function initMap() {
     });
 }
 
-jQuery(document).ready(function(){
-
+$(document).ready(function() {
+    $('#subnavright').append('<li><a class="responsive-toggle fa fa-bars"></a></li>');
+    
 });
 
 
@@ -148,7 +149,23 @@ $(function ($) {
     }
 
 //Main Slider carousel 
-
+function testfunction(){
+    $(".naturix-slider-1").owlCarousel({
+        dots: true,
+        loop: false,
+        autoplay: false,
+        autoplayHoverPause: true,
+        smartSpeed: 100,
+        nav: false,
+        margin: 0,
+        responsive: {
+            0: {items: 1},
+            1200: {items: 4},
+            992: {items: 3},
+            600: {items: 2}
+        }
+    });
+}
 
 
     /*------ Product Sliders --------*/
@@ -493,3 +510,11 @@ jQuery('.numbersOnly').on('keyup blur', function () {
     //  jQuery(document).ready(function(){
     //     formValidations();
     //  });
+
+    jQuery(function($){
+    $('.navbar-toggle').click(function(){
+    $('.navbar-collapse').toggleClass('right');
+    $('.navbar-toggle').toggleClass('indexcity');
+    });
+});
+

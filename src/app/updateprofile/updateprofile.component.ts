@@ -193,9 +193,9 @@ else{
     "MobileNo": this.Mobile,
     "Address":this.Address,
     "GSTNumber": this.GST,
-    "ZoneId": this.ZoneId,
-    "BranchId":this.BranchId,
-    "CityId":this.CityId
+    "ZoneId": 0,
+    "BranchId":0,
+    "CityId":0
 
   }
     const url = `${"http://api.simranfresh.com/api/updatemyprofile"}`;

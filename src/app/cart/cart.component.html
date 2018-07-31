@@ -1,33 +1,42 @@
-<app-header></app-header>
+<app-header [parentCount]="cartCoount"></app-header>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 <!-- Headings -->
-<section class="deals sec-space light-bg">
+<section class="deals sec-space light-bg our-space">
   <img alt="" src="assets/img/extra/sec-img-3.png" class="right-bg-img" />
   <img alt="" src="assets/img/extra/sec-img-4.png" class="left-bg-img" />
 
   <div class="container rel-div">
-    <div class="title-wrap row" style="margin-top: 9%;">
-      <h2 class="section-title" *ngIf="checkout==false && ordersuccess==false">
-        <strong>Shopping Cart
-          <img style="left: 117px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
-      </h2>
-      <h2 class="section-title" *ngIf="checkout==true && ordersuccess==false">
-        <strong>Billing Information
-          <img style="left: 60px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
-      </h2>
+<div class="col-md-3 col-sm-1 col-xs-1"></div>
+<div class="col-md-6 col-sm-10 col-xs-10 he">
+  <div class="title-wrap row" style="margin-top: 20%;">
+    <h2 class="section-title" *ngIf="checkout==false && ordersuccess==false">
+      <strong>Shopping Cart
+        <img style="left: 117px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
+    </h2>
+    <h2 class="section-title" *ngIf="checkout==true && ordersuccess==false">
+      <strong>Billing Information
+        <img style="left: 60px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
+    </h2>
 
-      <h4 class="sub-title">
-        <span>SIMRAN FRESH</span>
-      </h4>
-    </div>
+    <h4 class="sub-title">
+      <span>SIMRAN FRESH</span>
+    </h4>
+  </div>
+</div>
+<div class="col-md-3 col-sm-1 col-xs-1"></div>
   </div>
 </section>
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+
+
 <!-- Heading Ends -->
 <div *ngIf="productCartArray?.length == 0 || productCartArray==null">
   <div class="row">
     <div class="col-md-4 col-sm-4 col-xs-4"></div>
     <div class="col-md-4 col-sm-4 col-xs-4 emptycartimg">
         <img src='assets/img/extra/empty.png'>
+        <p style="font-family: cursive;
+        font-size: 20px;"><a [routerLink]="['/products', 1]">Shop Now.</a></p>
     </div>
     <div class="col-md-4 col-sm-4 col-xs-4"></div>
   </div>
@@ -36,44 +45,51 @@
 <div class="" style="margin-bottom: 10%;">
   <div class="container" style="margin-top: 4%;">
     <div class="col-md-12">
-      <div id="cart" class="col-md-8">
+      <div id="cart" data-aos="fade-right" data-aos-duration="2000" class="col-md-8" style="padding: 1%; margin-top:-1%;">
       
         <!-- product list start -->
         <div *ngIf="checkout==false && productCartArray?.length > 0 && ordersuccess==false">
           <div class="product" *ngFor="let data of productCartArray; let i = index">
-            <div class="col-md-4">
-              <img class="prod-img" alt="" src='{{data.objAttachmentsViewModel.AbsoluteURL}}' />
+              <a (click)="remove(data.Id, i)" role="button" class="close mobile" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </a>
+            <div class="col-md-4 col-sm-12 col-xs-12 boximg" style="text-align: center;">
+                <!-- (click)="productPreview(data.ProductId)" href="#product-preview" data-toggle="modal" -->
+              <a>
+                  <img class="prod-img" alt="" src='{{data.objAttachmentsViewModel.AbsoluteURL}}' />
+              </a>
+              
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-sm-12 col-xs-12">
               <h1>
                 {{data.ProductName}}
-                <a (click)="remove(data.Id, i)" role="button" class="close" aria-label="Close">
+                <a (click)="remove(data.Id, i)" role="button" class="close web" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </a>
               </h1>
-              {{data.Description}}
-              <div class="row" style="margin-top:3%">
+              
+              <div class="row" style="margin-top:-3%">
 <div class="col-md-4 col-sm-4 col-xs-4">
   <div class="form-group">
-    <label>Qty</label>
-   <div *ngIf="data.UnitName=='Pcs.'">
-    <input title="Qty" onkeypress="return event.charCode >= 48" class="form-control formin" maxlength="2" type="text" [(ngModel)]="data.Quantity" (keyup)="calculateProductPrice($event.target.value, data.Price, data, i)">
+    <label class="labo">Qty({{data.UnitName}})</label>
+   <div *ngIf="data.UnitName=='Pcs.' || data.UnitName=='Pkt.'">
+    <input title="Qty" onkeypress="return event.charCode >= 48" class="form-control first formin" type="text" [(ngModel)]="data.Quantity" (keyup)="calculateProductPrice($event.target.value, data.Price, data, i)">
    </div>
    <div *ngIf="data.UnitName=='Kg.'">
-    <input title="Qty" onkeypress="return event.charCode >= 46" class="form-control formin" maxlength="5" type="text" [(ngModel)]="data.Quantity" (keyup)="calculateProductPrice($event.target.value, data.Price, data, i)">
+    <input title="Qty" onkeypress="return event.charCode >= 46" class="form-control first formin" type="text" [(ngModel)]="data.Quantity" (keyup)="calculateProductPrice($event.target.value, data.Price, data, i)">
    </div>
   </div>
 </div>
 <div class="col-md-4 col-sm-4 col-xs-4">
   <div class="form-group">
-    <label>Price</label>
-    <input type="Qty" [value]="data.Price"  class="form-control formin" type="text" readonly>
+    <label class="labo">Price(INR)</label>
+    <input type="Qty" [value]="data.Price"  class="form-control second formin" type="text" readonly>
   </div>
 </div>
 <div class="col-md-4 col-sm-4 col-xs-4">
   <div class="form-group">
-    <label>Amount</label>
-    <input type="Qty" value={{data.finalPrice}} class="form-control formin" type="text" readonly>
+    <label class="labo">Amount(INR)</label>
+    <input type="Qty" value={{data.finalPrice}} class="form-control third formin" type="text" readonly>
   </div>
 </div></div>
             </div>
@@ -85,19 +101,26 @@
         <!-- product list ends -->
 
         <!-- Billing form -->
-        <div *ngIf="checkout==true && ordersuccess==false">
-          <div class="container" style="margin-top: 4%;">
+        <div *ngIf="checkout==true && ordersuccess==false" style="background-color: white; padding-top: 3%; border-radius: 5px;">
+          <div class="container">
+              <div class="row" style="
+              margin-bottom: 0%;
+              width: 20%;">
+                <div class="form-group col-md-8 col-xs-12 col-sm-12" style="text-align: center;">
+                  <button (click)="back()" style="font-size: 13px; padding: 5px;" class="btn"><i class="fa fa-arrow-left" style="font-size:12px;color:white"></i>  Back to Cart</button>
+                </div>
+              </div>
             <form [formGroup]="formGroup">
               <div class="row" style="margin-right:10%;">
                 <div class="form-group col-md-4">
-                  <label for="name">Name:</label>
+                  <label for="name"><span class="estric">*</span>Name:</label>
                   <input formControlName="Name" type="text" [(ngModel)]="Name" name="name" class="form-control">
-                  <p class="imp">*mandatory</p>
+                  <!-- <p class="imp">*mandatory</p> -->
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="mobile">Mobile No.:</label>
+                  <label for="mobile"><span class="estric">*</span>Mobile No:</label>
                   <input formControlName="MobileNo" type="text" maxlength="10" [(ngModel)]="MobileNo" name="mobileno" class="form-control">
-                  <p class="imp">*mandatory</p>
+                  <!-- <p class="imp">*mandatory</p> -->
                 </div>
               </div>
 
@@ -133,35 +156,31 @@
 
               <div class="row" style="margin-right:10%;">
                 <div class="form-group col-md-4">
-                    <label for="">City:</label>
+                    <label for=""><span class="estric">*</span>City:</label>
                     <select class="form-control" formControlName="C" [(ngModel)]="CityId">
                         <option value=''>--select city--</option>
                         <option class="form-control" *ngFor="let opt of City" [(ngValue)]="opt.Id">{{opt.Name}}</option>
                       </select>
-                      <p class="imp">*mandatory</p>
+                      <!-- <p class="imp">*mandatory</p> -->
                 </div>
                 <div class="col-xs-12 col-12 col-md-4 form-group col-md-4">
-                  <label for="datec">Delivery Date:</label>
+                  <label for="datec"><span class="estric">*</span>Delivery Date:</label>
                  <p class="form-control" style="padding-top:1%;"> {{autodate}}</p>
                   <!-- <input type="date"  value="autodate" formControlName="date" name="autodate" class="form-control" readonly> -->
-                  <p class="imp" style="margin-top:-4%;">*mandatory</p>
+                  <!-- <p class="imp" style="margin-top:-4%;">*mandatory</p> -->
                 </div>
               </div>
 
-              <div class="row" style="margin-right:10%;">
-                  <div class="form-group col-md-8">
-                    <label for="add">Address:</label>
+              <div class="row" style="margin-right:10%; margin-bottom: 2%;">
+                  <div class="form-group col-md-8 col-xs-12 col-sm-12">
+                    <label for="add"><span class="estric">*</span>Address:</label>
                     <input formControlName="Address" type="text" [(ngModel)]="Address" name="add" class="form-control">
-                    <p style="font-size:10px;">*mandatory</p>
+                    <!-- <p style="font-size:10px;">*mandatory</p> -->
                   </div>
                 </div>
 
 
-              <div class="row" style="margin-top: 2%">
-                <div class="col-md-1">
-                  <button (click)="back()" style="margin-bottom:5%;" class="btn">Back</button>
-                </div>
-              </div>
+             
             </form>
           </div>
 
@@ -173,25 +192,105 @@
       <div *ngIf="productCartArray?.length > 0 && ordersuccess==false">
         <div class="col-md-4">
             <div class="row">
+                <div class="item" class="">
+                    <div class="product-box">
+                      <div class="">
+                        <div class="left" style="padding: 0 25px; width:100%;">
+                          <div class="row">
+                          <h4 class="head">Price Summary</h4>
+                          </div>
+                          <div class=" subtotal row">
+                            <label class="col-md-4 left">
+                              SubTotal
+                            </label>
+                            <div class="col-md-2">:</div>
+                            <div class="col-md-6">
+                              <span class="right">₹ {{totalpra || 0}}</span>
+                            </div>
+                          </div>
+            
+                          <div class=" taxes row">
+                            <label class="col-md-4 left">
+                              Discount
+                            </label>
+                            <div class="col-md-2">:</div>
+                            <div class="col-md-6">
+                              <span class="right">₹ 0</span>
+                            </div>
+                          </div>
+            
+                          <!-- <div class=" taxes row">
+                                <label class="col-md-4 left">
+                                  Simran 
+                                  <input type="checkbox" ng-model="all">
+                                  Wallet
+                                </label>
+                                <div class="col-md-2">:</div>
+                                <div class="col-md-6">
+                                  <span class="right" ng-disabled="all">₹ 0</span>
+                                </div>
+                              </div> -->
+            
+                          <!-- <div class=" taxes row">
+                            <label class="col-md-4 left">
+                              Taxes(5%)
+                            </label>
+                            <div class="col-md-2">:</div>
+                            <div class="col-md-6">
+                              <span class="right">₹ {{taxes}}</span>
+                            </div>
+                          </div> -->
+                          <div class=" shipping row">
+                            <label class="col-md-4 left">
+                              Shipping
+                            </label>
+                            <div class="col-md-2">:</div>
+                            <div class="col-md-6">
+                              <span class="right">₹ {{shipping}}</span>
+                            </div>
+                          </div>
+                          <div class=" total row">
+                            <label class="col-md-4 left">
+                              Total
+                            </label>
+                            <div class="col-md-2">:</div>
+                            <div class="col-md-6">
+                              <span class="right">₹ {{total}}</span>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div *ngIf="checkout==false" class="col-sm-12">
+                              <a (click)="check()" role="button" style="background-color: green; margin-bottom: 22px;" class="btn checkout">Checkout</a>
+                            </div>
+                            <div *ngIf="checkout==true" class="col-sm-12">
+                              <a (click)="placeorder()" role="button" style="background-color: green; margin-bottom: 22px;" class="btn checkout">Place Order</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+             </div>
+            <div class="row">
              
                 <div class="item" >
-                  <div class="product-box" style="margin-top:10px; margin-bottom:10px; margin-left:15px; width:92%;">
+                  <div class="product-box" style="margin-top:10px; margin-bottom:10px; margin-left:0px; width:100%;">
                     <div class="">
                       <div class="left" style="padding: 0 25px; width:100%;">
                      <div class="row">
-                        <h4>Payment Option</h4>
-                        <hr>
-                        
-                          <li class="floatleft">
-                            <a>
-                              Cash on delivery.
-                            </a>
-                          </li>
-                          <li class="floatleft">
-                            <a>
-                              Online payment comming soon.
-                            </a>
-                          </li>
+                        <h4 class="head">Payment Methods</h4>
+                     <ul class="info">
+                      <li class="floatleft">
+                        <a>
+                          Cash on delivery.
+                        </a>
+                      </li>
+                      <li class="floatleft" style="margin-bottom: 8px;">
+                        <a>
+                          Online payment comming soon.
+                        </a>
+                      </li>
+                     </ul>
                         
                      </div>
                       </div>
@@ -203,21 +302,22 @@
             <div class="row">
              
                 <div class="item" >
-                  <div class="product-box" style="margin-bottom:10px; margin-left:15px; width:92%;">
+                  <div class="product-box" style="margin-bottom:10px; margin-left:0px; width:100%;">
                     <div class="">
                       <div class="left" style="padding: 0 25px; width:100%;">
                      <div class="row">
-                        <h4>Delivery Time:</h4>
-                        <hr>
-                        <li class="floatleft">
-                            <a style="margin-top:0;">Same day delivery, if order done before 12:30AM..!</a>
-                        </li>
-                        <li class="floatleft" style="margin-right:6%;">
-                            <a style="margin-top:0;">Next day delivery in morning, if order done before 10PM..!</a>
-                        </li>                        
-                        <li class="floatleft">
-                            <a style="margin-top:0;"> Next day delivery in noon, if order done after 10PM..!</a>
-                        </li>
+                        <h4 class="head">Delivery Time:</h4>
+                    <ul class="info">
+                      <li class="floatleft">
+                        <a>Same day delivery, if order done before 12:30AM.</a>
+                    </li>
+                    <li class="floatleft">
+                        <a>Next day delivery in morning, if order done before 10PM.</a>
+                    </li>                        
+                    <li class="floatleft" style="margin-bottom: 8px;">
+                        <a> Next day delivery in noon, if order done after 10PM.</a>
+                    </li>
+                    </ul>
                        
                      </div>
                       </div>
@@ -226,83 +326,7 @@
                 </div>
            
         </div>
- <div class="row">
-    <div class="item" class="">
-        <div class="product-box">
-          <div class="">
-            <div class="left" style="padding: 0 25px; width:100%;">
-              <div class="row">
-              <h4>Price Detail</h4>
-              </div>
-              <div class=" subtotal row">
-                <label class="col-md-4 left">
-                  SubTotal
-                </label>
-                <div class="col-md-2">:</div>
-                <div class="col-md-6">
-                  <span class="right">₹ {{totalprice || 0}}</span>
-                </div>
-              </div>
 
-              <div class=" taxes row">
-                <label class="col-md-4 left">
-                  Discount
-                </label>
-                <div class="col-md-2">:</div>
-                <div class="col-md-6">
-                  <span class="right">₹ 0</span>
-                </div>
-              </div>
-
-              <!-- <div class=" taxes row">
-                    <label class="col-md-4 left">
-                      Simran 
-                      <input type="checkbox" ng-model="all">
-                      Wallet
-                    </label>
-                    <div class="col-md-2">:</div>
-                    <div class="col-md-6">
-                      <span class="right" ng-disabled="all">₹ 0</span>
-                    </div>
-                  </div> -->
-
-              <!-- <div class=" taxes row">
-                <label class="col-md-4 left">
-                  Taxes(5%)
-                </label>
-                <div class="col-md-2">:</div>
-                <div class="col-md-6">
-                  <span class="right">₹ {{taxes}}</span>
-                </div>
-              </div> -->
-              <div class=" shipping row">
-                <label class="col-md-4 left">
-                  Shipping
-                </label>
-                <div class="col-md-2">:</div>
-                <div class="col-md-6">
-                  <span class="right">₹ {{shipping}}</span>
-                </div>
-              </div>
-              <div class=" total row">
-                <label class="col-md-4 left">
-                  Total
-                </label>
-                <div class="col-md-2">:</div>
-                <div class="col-md-6">
-                  <span class="right">₹ {{total}}</span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <a (click)="check()" role="button" style="background-color: green; margin-bottom: 10px;" class="btn checkout">CheckOut</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
- </div>
 
 
 
@@ -314,5 +338,110 @@
   </div>
 
 </div>
+
+
+<!-- Product Preview -->
+<div *ngIf="showModal==true" class="modal fade" id="product-preview">
+    <div class="modal-dialog modal-lg product-modal">
+      <div class="modal-content">
+        <a aria-hidden="true" data-dismiss="modal" (click)="reset()" class="sb-close-btn close" id="close">
+          <i class="fa fa-close"></i>
+        </a>
+  
+        <div class="product-single pb-50 clearfix">
+          <div class="col-md-6 col-sm-6 col-xs-6 col-sm-offset-2 col-lg-offset-0 pt-50">
+            <div class="prod-slider sync1">
+              <div class="item">
+                <div class="">
+                  <img src='{{imgPreview}}' alt="" class="imgpre" style="width: 80%; margin-top: 5%;">
+                  <a href='{{imgPreview}}' data-gal="prettyPhoto[prettyPhoto]" title="Product" class="caption-link">
+                    <i class="arrow_expand"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6 pt-50">
+            <div class="product-content block-inline">
+              <div class="single-caption">
+                <h3 class="section-title previewname">
+                  <a>
+                    <strong>{{preview.Name}}</strong>
+                  </a>
+                </h3>
+                <span class="divider-2"></span>
+                <p class="price">
+                  <strong class="clr-txt fsz-20 pro">₹ {{preview.Price}}/{{preview.UoMName}} </strong>
+                </p>
+  
+            
+                <p *ngIf="read==false;" class="disco">{{preview.Description}}</p>
+                <p *ngIf="read==true" class="dec">{{preview.Description}}</p>
+                <a *ngIf="length > 30 && read==false" (click)="readmore()" class="colla">Read More</a>
+                <a *ngIf="read==true" (click)="readless()" class="colla">Read Less</a>
+                  
+  
+                <div class="row  quanttotal">
+                  <div class="">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <div class="form-group">
+                        <label class="lab">Qty ({{preview.UoMName}})</label>
+                        <div *ngIf="preview.UoMName=='Pcs.' || preview.UoMName=='Pkt.'">
+                          <input type="text" vlaue="0" onkeypress="return event.charCode >= 48" class="call numbersOnly" [(ngModel)]="preview.MinQuantity"
+                            maxlength="2" (keyup)="calculateProductPricePrev($event.target.value, preview.Price, i)" required>
+                        </div>
+                        <div *ngIf="preview.UoMName=='Kg.'">
+                          <input type="text" value="0" onkeypress="return event.charCode >= 46" class="call form-control" name="" maxlength="6" [(ngModel)]="preview.MinQuantity"
+                            (keyup)="calculateProductPricePrev($event.target.value, preview.Price, i)" required placeholder="0">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <div class="form-group">
+                        <label class="lab">Total (Rs.)</label>
+                        <div>
+                          <input type="text" placeholder="0" class="call disabletotal form-control" [(ngModel)]="prevfinalprice" readonly>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ul class="meta">
+                  <!-- <li>
+                    <strong> CATEGORY </strong>
+                    <span>: {{preview.ProductCategoryName}}</span>
+                  </li> -->
+                </ul>
+                <div class="divider-full-1"></div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <a (click)="whishlist(preview, preview.MinQuantity)">
+                      <button class="bot">
+                        <span class="fa fa-heart"></span> Add to Wishlist</button>
+                    </a>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6 add-cart">
+                    <a aria-hidden="true" data-dismiss="modal" *ngIf="preview.MinQuantity > 0" (click)="cartdata(preview, preview.MinQuantity)">
+                      <button class="bot">
+                        <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                    </a>
+                    <a aria-hidden="true" data-dismiss="modal" *ngIf="preview.MinQuantity == null || preview.MinQuantity == 0 || preview.MinQuantity == undefined || preview.MinQuantity == '' || preview.MinQuantity=='.'"
+                      class="">
+                      <button class="bot disable">
+                        <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                    </a>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Product Preview Ends -->
+  
+  
 
 <app-footer></app-footer>

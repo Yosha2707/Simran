@@ -1,25 +1,43 @@
 <app-header></app-header>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 
 <!-- Headings -->
-<section class="deals sec-space light-bg">
+<section class="deals sec-space light-bg our-space">
   <img alt="" src="assets/img/extra/sec-img-3.png" class="right-bg-img" />
   <img alt="" src="assets/img/extra/sec-img-4.png" class="left-bg-img" />
 
   <div class="container rel-div">
+<div class="col-md-3 col-sm-1 col-xs-1"></div>
+<div class="col-md-6 col-sm-10 col-xs-10 head">
     <div class="title-wrap row" style="margin-top: 20%;">
-      <h2 class="section-title">
-        <strong>My Orders
-          <img style="left: 143px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
-      </h2>
-     
-      <h4 class="sub-title">
-        <span>SIMRAN FRESH</span>
-      </h4>
-    </div>
+        <h2 class="section-title">
+          <strong>My Orders
+            <img style="left: 117px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
+        </h2>
+  
+        <h4 class="sub-title">
+          <span>SIMRAN FRESH</span>
+        </h4>
+      </div>
+</div>
+<div class="col-md-3 col-sm-1 col-xs-1"></div>
   </div>
 </section>
 <!-- Heading Ends -->
 
+
+
+<div *ngIf="array?.length==0">
+  <div class="container">
+    <div class="col-md-3 col-sm-3 col-xs-3"></div>
+    <div class="col-md-6 col-sm-6 col-xs-6" style="text-align: center; margin-top: 10%;">
+      <img src='assets/img/extra/nooreders.png'>
+      <p style="font-family: cursive;
+      font-size: 20px;">No Orders Yet. <a [routerLink]="['/products', 1]">Shop Now</a>.</p>
+    </div>
+    <div class="col-md-3 col-xs-3 col-sm-3"></div>
+  </div>
+</div>
 
 <div class="container">
   <div class="row" style=" margin-top:5%; margin-bottom: 5%;">
@@ -31,6 +49,7 @@
                   <h2>OrderId</h2>
                     <a [routerLink]="['/info', data.Id]"><h4 class="title-sec subtitle">{{data.OrderId}}</h4></a>
                     <!-- <h2 class="section-title"> <span class="light-font"></span> </h2> -->
+                    <!-- <a><h4 class="title-sec subtitle">{{data.OrderId}}</h4></a> -->
                     <div class="row">
                       <div class="section-title col-md-6 col-xs-6 col-sm-6 subinfo">
                          <p> Order Date:{{data.OrderDate | date}}</p>
@@ -45,6 +64,9 @@
         
     </div>
   </div>
+ <div class="row">
+  <button class="greenbtn" style="margin-bottom: 10%; padding: 5px; width: 65px;" routerLink="/myaccount"><i class="fa fa-arrow-left" style="font-size:12px;color:white"></i> Back</button>
+ </div>
 </div>
 
 

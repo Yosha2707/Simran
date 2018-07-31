@@ -8,8 +8,8 @@
 
   <div class="container rel-div">
     <div class="title-wrap row" style="margin-top: 20%;" *ngFor="let data of array |  slice:0:1">
-      <div class="col-md-3 col-sm-1 col-xs-1"></div>
-      <div class="col-md-6 col-sm-10 col-xs-10 heading">
+      <div class="col-md-2 col-sm-1 col-xs-1"></div>
+      <div class="col-md-8 col-sm-10 col-xs-10 heading">
         <h2 class="section-title">
           <strong>{{data.ProductCategoryName}}</strong>
         </h2>
@@ -17,32 +17,49 @@
         <h4 class="sub-title">
           <span>SIMRAN FRESH</span>
         </h4>
-        <input type="text" (keyup)="search($event.target.value, data.ProductCategoryId)" class="form-control title-wrap" style="width: 65%; margin-top: 2%; margin-left:18%;"
-          placeholder="{{data.ProductCategoryName}}" [(ngModel)]="searchKey" ngFocus="true" />
+        <div class="row textrow">
+          <div class="col-md-4 col-sm-0 col-xs-0 mob"></div>
+         <div class="col-md-4 col-xs-12 col-sm-12">
+          <!-- <ng-select [options]="myOptions" class="form-control" [(ngModel)] ="name" placeholder="{{data.ProductCategoryName}}">
+          </ng-select> -->
+          <select class="form-control" [(ngModel)]="name" (change)="search(name, pagecontent)">
+            <option value=''>--All {{data.ProductCategoryName}}--</option>
+            <option class="form-control" *ngFor="let opt of myOptions" [(ngValue)]="opt.label">{{opt.label}}</option>
+          </select>
+         </div> 
+        </div>
       </div>
-      <div class="col-md-3 col-sm-1 col-xs-1"></div>
+      <div class="col-md-4 col-sm-0 col-xs-0"></div>
     </div>
   </div>
 </section>
 <!-- Heading Ends -->
+<div *ngIf="noproduct==true">
+  <div class="container">
+    <div class="col-md-3 col-sm-3 col-xs-3"></div>
+    <div class="col-md-6 col-sm-6 col-xs-6" style="text-align: center; margin-top: 10%; margin-bottom: 15%">
+      <img src='assets/img/extra/comming.png'>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3"></div>
+  </div>
+</div>
 
-
-<div class="organic-all sec-space-bottom">
+<div *ngIf="noproduct==false" class="organic-all sec-space-bottom">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="tab-content organic-content">
           <div id="product-tab-1" class="tab-pane fade active in">
             <div class="product-slider-1 dots-1">
-              <div *ngIf="array?.length==''">
+              <!-- <div *ngIf="array?.length==''">
                 <div class="row" style="margin-top:10%;">
                   <div class="col-md-3 col-sm-3 col-xs-3"></div>
                   <div class="col-md-6 col-sm-6 col-xs-6">
-                    <img src='assets/img/extra/trans-product-not-found.png'>
+                    <img class="hi" src='assets/img/extra/trans-product-not-found.png'>
                   </div>
                   <div class="col-md-3 col-xs-3 col-sm-3"></div>
                 </div>
-              </div>
+              </div> -->
               <div class="item col-md-3 col-sm-6 col-xs-12" *ngFor="let data of array; let i = index">
                 <div class="product-box" style="min-height: 350px;">
                   <div class="product-media">
@@ -52,20 +69,29 @@
                     </div>
                     <div class="isstockfalse" *ngIf="data.IsOutOfStock==false">
                       <a (click)="productPreview(data.Id)" href="#product-preview" data-toggle="modal">
-                          <img class="prod-img vegeImage" src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}' />
+                        <img class="prod-img vegeImage" src='{{data["objAttachmentsViewModel"]["AbsoluteURL"]}}' />
                       </a>
                     </div>
                   </div>
                   <div class="product-caption">
-                  <a (click)="productPreview(data.Id)" href="#product-preview" data-toggle="modal">
-                      <h3 class="product-title namedesc">
+                    <div *ngIf="data.IsOutOfStock==false">
+                      <a (click)="productPreview(data.Id)" href="#product-preview" data-toggle="modal">
+                        <h3 class="product-title namedesc">
                           <span class="light-font"> </span>
                           <strong>{{data["Name"]}}</strong>
                         </h3>
-                  </a>
-
+                      </a>
+                    </div>
+                    <div *ngIf="data.IsOutOfStock==true">
+                      <a>
+                        <h3 class="product-title namedesc">
+                          <span class="light-font"> </span>
+                          <strong>{{data["Name"]}}</strong>
+                        </h3>
+                      </a>
+                    </div>
                     <div class="row" class="desc">
-                      <a (click)="productPreview(data.Id)" href="#product-preview" class="viewMore" data-toggle="modal">
+                      <a *ngIf="data.IsOutOfStock==false" (click)="productPreview(data.Id)" href="#product-preview" class="viewMore" data-toggle="modal">
                         View more..
                       </a>
                     </div>
@@ -75,23 +101,31 @@
                     </div>
                   </div>
                   <div class="row addto">
-                   <div class="col-md-6 col-sm-6 col-xs-6">
-                    <a (click)="whishlist(data)">
-                      <button class="btn wish">
-                        <span class="fa fa-heart"></span> Add to Wishlist</button>
-                    </a>
-                   </div>
-                 <div class="col-md-6 col-sm-6 col-xs-6">
-                  <a (click)="productPreview(data.Id)" href="#product-preview" data-toggle="modal">
-                    <button class="btn">
-                      <span class="fa fa-shopping-cart"></span> Add to Cart</button>
-                  </a>
-                  <!-- <a *ngIf="data.MinQuantity == null || data.MinQuantity == 0 || data.MinQuantity == undefined || data.MinQuantity == '' || data.MinQuantity=='.'"
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <a *ngIf="data.repeatWish!=true" (click)="whishlist($event, data, i)">
+                        <button class="btn wish myspan">
+                          <span class="fa fa-heart myspan"></span> Add to Wishlist</button>
+                      </a>
+                      <a *ngIf="data.repeatWish==true">
+                        <button data-aos="flip-right" class="btn wish">
+                          <span class="fa fa-heart"></span> Saved</button>
+                      </a>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <a *ngIf="data.IsOutOfStock==false" (click)="productPreview(data.Id)" href="#product-preview" data-toggle="modal">
+                        <button class="btn">
+                          <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                      </a>
+                      <a *ngIf="data.IsOutOfStock==true" class="">
+                        <button class="btn disable">
+                          <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                      </a>
+                      <!-- <a *ngIf="data.MinQuantity == null || data.MinQuantity == 0 || data.MinQuantity == undefined || data.MinQuantity == '' || data.MinQuantity=='.'"
                     class="">
                     <button class="btns disable">
                       <span class="fa fa-shopping-cart"></span> Add to Cart</button>
                   </a> -->
-                 </div>
+                    </div>
                   </div>
                   <!-- <hr>
                   <div *ngIf="data.IsOutOfStock==true">
@@ -99,11 +133,11 @@
                   </div>
 
                   <div *ngIf="data.IsOutOfStock==false"> -->
-                    
-                    <!-- <div class="row" style="margin-left: 0; margin-right: 0; margin-top:-8%;"> -->
+
+                  <!-- <div class="row" style="margin-left: 0; margin-right: 0; margin-top:-8%;"> -->
 
 
-                      <!-- <div class="col-md-3 col-sm-3 col-xs-3">
+                  <!-- <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="form-group">
                           <label class="lab">Qty ({{data.UoMName}})</label>
                           <div *ngIf="data.UoMName=='Pcs.' || data.UoMName=='Pkt.'">
@@ -125,12 +159,12 @@
                       <div class="col-md-6 col-sm-6 col-xs-6" style="margin-top: 25px;">
                         
                       </div> -->
-                      <!-- <div class="col-md-6" style="margin-top: 25px;">
+                  <!-- <div class="col-md-6" style="margin-top: 25px;">
                           <button  *ngIf="data.MinQuantity > 0" (click)="cartdata(data, data.MinQuantity)" class="fa fa-shopping-cart shopcart"></button>
                           <button *ngIf="data.MinQuantity == null || data.MinQuantity == 0 || data.MinQuantity == undefined || data.MinQuantity == ''" class="fa fa-shopping-cart shopcart disable">ADD</button>
                           <button (click)="whishlist(data)" class="fa fa-heart shopheart" title="Add to Wishlist"></button>
                         </div> -->
-                    <!-- </div> 
+                  <!-- </div> 
                   </div>-->
                 </div>
               </div>
@@ -143,19 +177,19 @@
 </div>
 
 <!-- Product Preview -->
-<div class="modal fade" id="product-preview">
+<div *ngIf="showModal==true" class="modal fade" id="product-preview">
   <div class="modal-dialog modal-lg product-modal">
     <div class="modal-content">
-      <a aria-hidden="true" data-dismiss="modal" class="sb-close-btn close" href="#">
-        <i class=" fa fa-close"></i>
+      <a aria-hidden="true" data-dismiss="modal" (click)="reset()" class="sb-close-btn close" id="close">
+        <i class="fa fa-close"></i>
       </a>
 
       <div class="product-single pb-50 clearfix">
-        <div class="col-md-4 col-sm-4 col-sm-offset-2 col-lg-offset-0 pt-50">
+        <div class="col-md-6 col-sm-12 col-xs-12 col-sm-offset-2 col-lg-offset-0 pt-50">
           <div class="prod-slider sync1">
             <div class="item">
               <div class="">
-                <img src='{{imgPreview}}' alt="" class="imgpre" style="width: 80%;">
+                <img src='{{imgPreview}}' alt="" class="imgpre" style="width: 80%; margin-top: 5%;">
                 <a href='{{imgPreview}}' data-gal="prettyPhoto[prettyPhoto]" title="Product" class="caption-link">
                   <i class="arrow_expand"></i>
                 </a>
@@ -163,7 +197,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 pt-50">
+        <div class="col-md-6 col-sm-12 col-xs-12 pt-50">
           <div class="product-content block-inline">
             <div class="single-caption">
               <h3 class="section-title previewname">
@@ -176,26 +210,22 @@
                 <strong class="clr-txt fsz-20">₹ {{preview.Price}}/{{preview.UoMName}} </strong>
               </p>
 
-              <div class="row desrow">
-                <div class="container">
-                    <div class="fsz-16 col-md-3 col-xs-12 col-sm-12">
-                        <p class="content hideContent">{{preview.Description}}</p>
-                      </div>
-                      
-                </div>
-              </div>
 
+              <p *ngIf="read==false;" class="disco">{{preview.Description}}</p>
+              <p *ngIf="read==true" class="dec">{{preview.Description}}</p>
+              <a *ngIf="length > 30 && read==false" (click)="readmore()" class="colla">Read More</a>
+              <a *ngIf="read==true" (click)="readless()" class="colla">Read Less</a>
               <div class="row  quanttotal">
                 <div class="">
                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="form-group">
                       <label class="lab">Qty ({{preview.UoMName}})</label>
-                      <div *ngIf="preview.UoMName=='Pcs.' || preview.UoMName=='Pkt.'">
-                        <input type="text" onkeypress="return event.charCode >= 48" class="call numbersOnly" [(ngModel)]="preview.MinQuantity" maxlength="2"
-                          (keyup)="calculateProductPricePrev($event.target.value, preview.Price, i)" required placeholder="0">
+                      <div *ngIf="preview.UoMName=='Pcs.' || preview.UoMName=='Pkt.' || preview.UoMName=='Bunch'">
+                        <input type="text" vlaue="0" onkeypress="return event.charCode >= 48" class="call numbersOnly" [(ngModel)]="preview.MinQuantity"
+                          maxlength="2" (keyup)="calculateProductPricePrev($event.target.value, preview.Price, i)" required>
                       </div>
                       <div *ngIf="preview.UoMName=='Kg.'">
-                        <input type="text" onkeypress="return event.charCode >= 46" class="call numbersOnly" name="" maxlength="6" [(ngModel)]="preview.MinQuantity"
+                        <input type="text" value="0" onkeypress="return event.charCode >= 46" class="call numbersOnly" name="" [(ngModel)]="preview.MinQuantity"
                           (keyup)="calculateProductPricePrev($event.target.value, preview.Price, i)" required placeholder="0">
                       </div>
                     </div>
@@ -203,9 +233,9 @@
                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="form-group">
                       <label class="lab">Total (Rs.)</label>
-                     <div>
-                      <input type="text" placeholder="0" class="call disabletotal" [(ngModel)]="prevfinalprice" readonly>
-                     </div>
+                      <div>
+                        <input type="text" placeholder="0" class="call disabletotal" [(ngModel)]="prevfinalprice" readonly>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -218,25 +248,29 @@
               </ul>
               <div class="divider-full-1"></div>
               <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <a (click)="whishlist(data)">
-                        <button class="btn wish">
-                          <span class="fa fa-heart"></span> Add to Wishlist</button>
-                      </a>
-                </div>
+                <!-- <div class="col-md-6 col-sm-6 col-xs-6">
+                  <a *ngIf="repeatWish!=true" (click)="whishlist($event, preview, preview.MinQuantity)">
+                    <button class="btn wish">
+                      <span class="fa fa-heart"></span> Add to Wishlist</button>
+                  </a>
+                  <a *ngIf="repeatWish==true">
+                    <button class="btn wish">
+                      <span class="fa fa-heart"></span> Saved</button>
+                  </a>
+                </div> -->
                 <div class="col-md-6 col-sm-6 col-xs-6 add-cart">
-                        <a *ngIf="preview.MinQuantity > 0" (click)="cartdata(preview, preview.MinQuantity)">
-                          <button class="btn">
-                            <span class="fa fa-shopping-cart"></span> Add to Cart</button>
-                        </a>
-                         <a *ngIf="preview.MinQuantity == null || preview.MinQuantity == 0 || preview.MinQuantity == undefined || preview.MinQuantity == '' || preview.MinQuantity=='.'"
-                          class="">
-                          <button class="btn disable">
-                            <span class="fa fa-shopping-cart"></span> Add to Cart</button>
-                        </a> 
+                  <a aria-hidden="true" data-dismiss="modal" *ngIf="preview.MinQuantity > 0" (click)="cartdata(preview, preview.MinQuantity)">
+                    <button class="btn">
+                      <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                  </a>
+                  <a aria-hidden="true" data-dismiss="modal" *ngIf="preview.MinQuantity == null || preview.MinQuantity == 0 || preview.MinQuantity == undefined || preview.MinQuantity == '' || preview.MinQuantity=='.'"
+                    class="">
+                    <button class="btn disable">
+                      <span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                  </a>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>

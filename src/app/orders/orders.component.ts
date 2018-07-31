@@ -21,6 +21,7 @@ export class OrdersComponent implements OnInit {
   array:any [];
   UserId;
   info;
+  public loading = false;
   constructor(private toastr: ToastrService,public route:ActivatedRoute, public userService: DataService, private http: Http, private router : Router) {
     this.list();
    }
@@ -30,10 +31,12 @@ export class OrdersComponent implements OnInit {
   }
 
 list(){
+  this.loading = true;
   var user = JSON.parse(localStorage.getItem('currentUser'));
   this.UserId = user.Response.objCustomerViewModel.Id;
   var obj={
-    "CustomerId": this.UserId
+    "CustomerId": this.UserId,
+    "Page":"Order"
   }
 
   let headers = new Headers({ "content-type": "application/json", });
@@ -43,6 +46,9 @@ list(){
   .subscribe((res:Response) => {
   this.DataArray = res;
   this.array = this.DataArray.Response
+  this.loading = false;
+  console.log("*********")
+  console.log(res);
 console.log(this.array)
   }); 
 }

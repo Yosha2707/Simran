@@ -3,21 +3,25 @@
 
 
 <!-- Headings -->
-<section class="deals sec-space light-bg">
+<section class="deals sec-space light-bg our-space">
   <img alt="" src="assets/img/extra/sec-img-3.png" class="right-bg-img" />
   <img alt="" src="assets/img/extra/sec-img-4.png" class="left-bg-img" />
 
   <div class="container rel-div">
+<div class="col-md-3 col-sm-1 col-xs-1"></div>
+<div class="col-md-6 col-sm-10 col-xs-10 head">
     <div class="title-wrap row" style="margin-top: 20%;">
-      <h2 class="section-title">
-        <strong>Register
-          <img style="left: 70px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
-      </h2>
-     
-      <h4 class="sub-title">
-        <span>SIMRAN FRESH</span>
-      </h4>
-    </div>
+        <h2 class="section-title">
+          <strong>Register
+            <img style="left: 106px;" src="assets/img/icons/logo-icon.png" alt="" /> </strong>
+        </h2>
+  
+        <h4 class="sub-title">
+          <span>SIMRAN FRESH</span>
+        </h4>
+      </div>
+</div>
+<div class="col-md-3 col-sm-1 col-xs-1"></div>
   </div>
 </section>
 <!-- Heading Ends -->
@@ -52,7 +56,7 @@
         <form [formGroup]="authform">
            
           <div class="form-group">
-            <input type="text" [(ngModel)]="register.MobileNo" onkeypress="return event.charCode>47 && event.charCode<58" name="mobile" placeholder="Mobile No (User Id)" class="form-control" maxlength="10"
+            <input type="text" [(ngModel)]="register.MobileNo" onkeypress="return event.charCode>47 && event.charCode<58" name="mobile" placeholder="Mobile No (User-Id)" class="form-control" maxlength="10"
               formControlName="MobileNo">
           </div>
           <p class="imp">*mandatory</p>
@@ -60,7 +64,7 @@
           <p style="color:red;" *ngIf="authform.controls.MobileNo.hasError('minlength') && authform.controls.MobileNo.touched">*Enter Valid Mobile No..!!</p>
          
           <div class="form-group">
-            <input type="text" onkeypress="return event.charCode>96 && event.charCode<123" [(ngModel)]="register.FullName" name="fullname" placeholder="Full Name" class="form-control" formControlName="FullName">
+            <input type="text" onkeypress="return event.charCode>64 || event.charCode==32" [(ngModel)]="register.FullName" name="fullname" placeholder="Full Name" class="form-control" formControlName="FullName">
           </div>
           <p class="imp">*mandatory</p>
           <p style="color:red;" *ngIf="authform.controls.FullName.hasError('required') && authform.controls.FullName.touched">*Name is required</p>
